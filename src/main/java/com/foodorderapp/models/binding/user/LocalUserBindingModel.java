@@ -10,8 +10,8 @@ import org.springframework.security.oauth2.core.user.OAuth2User;
 
 import java.util.Collection;
 import java.util.Map;
+public class LocalUserBindingModel extends User implements OAuth2User, OidcUser {
 
-public class LocalUserBindingModel  extends User implements OAuth2User, OidcUser {
     private static final long serialVersionUID = -2845160792248762779L;
     private final OidcIdToken idToken;
     private final OidcUserInfo userInfo;
@@ -27,9 +27,10 @@ public class LocalUserBindingModel  extends User implements OAuth2User, OidcUser
             final boolean accountNonLocked,
             final Collection<? extends GrantedAuthority> authorities,
             final com.foodorderapp.models.entity.User user) {
-        this(userID, password, enabled, accountNonExpired,
-                credentialsNonExpired, accountNonLocked,
-                authorities, user, null, null);
+        this(userID, password, enabled,
+                accountNonExpired, credentialsNonExpired,
+                accountNonLocked, authorities, user,
+                null, null);
     }
 
     public LocalUserBindingModel(
@@ -43,36 +44,33 @@ public class LocalUserBindingModel  extends User implements OAuth2User, OidcUser
             final com.foodorderapp.models.entity.User user,
             OidcIdToken idToken,
             OidcUserInfo userInfo) {
-        super(userID,
-                password,
-                enabled,
-                accountNonExpired,
-                credentialsNonExpired,
-                accountNonLocked,
-                authorities);
-
+        super(userID, password, enabled,
+                accountNonExpired, credentialsNonExpired,
+                accountNonLocked, authorities);
         this.user = user;
         this.idToken = idToken;
         this.userInfo = userInfo;
     }
 
-
     public static LocalUserBindingModel create(
             com.foodorderapp.models.entity.User user,
             Map<String, Object> attributes,
-            OidcIdToken idToken, OidcUserInfo userInfo) {
-        LocalUserBindingModel localUser = new LocalUserBindingModel(
-                user.getEmail(),
-                user.getPassword(),
-                user.isEnabled(),
-                true,
-                true,
-                true,
-                GeneralUtils.buildSimpleGrantedAuthorities(user.getRoles()),
-                user,
-                idToken,
-                userInfo);
+            OidcIdToken idToken,
+            OidcUserInfo userInfo) {
+        LocalUserBindingModel localUser =
+                new LocalUserBindingModel(
+                        user.getEmail(),
+                        user.getPassword(),
+                        user.isEnabled(),
+                        true,
+                        true,
+                        true,
+                        GeneralUtils.buildSimpleGrantedAuthorities(user.getRoles()),
+                        user,
+                        idToken,
+                        userInfo);
         localUser.setAttributes(attributes);
+
         return localUser;
     }
 

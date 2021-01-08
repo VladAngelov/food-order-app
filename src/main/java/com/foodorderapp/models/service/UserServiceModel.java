@@ -1,26 +1,27 @@
 package com.foodorderapp.models.service;
 
 import com.foodorderapp.constants.Errors;
+import com.foodorderapp.models.entity.Role;
 import org.hibernate.validator.constraints.Length;
 import javax.validation.constraints.Min;
+import java.util.Set;
 
 public class UserServiceModel {
     private String email;
     private String password;
-    private Integer count;
+    private Set<Role> roles;
 
     public UserServiceModel() {
     }
     public UserServiceModel(
             String email,
             String password,
-            Integer count) {
+            Set<Role> roles) {
         this.email = email;
         this.password = password;
-        this.count = count;
+        this.roles = roles;
     }
 
-    @Length(min = 3, message = Errors.NAME_ERROR)
     public String getEmail() {
         return email;
     }
@@ -28,7 +29,6 @@ public class UserServiceModel {
         this.email = email;
     }
 
-    @Length(min = 4, message = Errors.PASSWORD_ERROR)
     public String getPassword() {
         return password;
     }
@@ -36,11 +36,10 @@ public class UserServiceModel {
         this.password = password;
     }
 
-    @Min(value = 1, message = Errors.VOLUME_ERROR)
-    public Integer getCount() {
-        return count;
+    public Set<Role> getRoles() {
+        return roles;
     }
-    public void setCount(Integer count) {
-        this.count = count;
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 }

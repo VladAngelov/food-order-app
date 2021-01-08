@@ -22,9 +22,7 @@ import javax.persistence.TemporalType;
 @NoArgsConstructor
 @Getter
 @Setter
-@Table(name = "users")
 public class User implements Serializable {
-
     private static final long serialVersionUID = 65981149772133526L;
 
     @Id
@@ -57,6 +55,8 @@ public class User implements Serializable {
     // bi-directional many-to-many association to Role
     @JsonIgnore
     @ManyToMany
-    @JoinTable(name = "user_role", joinColumns = { @JoinColumn(name = "USER_ID") }, inverseJoinColumns = { @JoinColumn(name = "ROLE_ID") })
+    @JoinTable(name = "user_role",
+            joinColumns = { @JoinColumn(name = "USER_ID") },
+            inverseJoinColumns = { @JoinColumn(name = "ROLE_ID") })
     private Set<Role> roles;
 }

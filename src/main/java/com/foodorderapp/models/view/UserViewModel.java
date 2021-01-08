@@ -1,12 +1,12 @@
 package com.foodorderapp.models.view;
 
-import java.util.List;
+import java.util.Set;
 
 public class UserViewModel {
     private String id;
     private String displayName;
     private String email;
-    private List<String> roles;
+    private Set<String> roles;
 
     public UserViewModel() {
     }
@@ -15,7 +15,7 @@ public class UserViewModel {
             String id,
             String displayName,
             String email,
-            List<String> roles) {
+            Set<String> roles) {
         this.id = id;
         this.displayName = displayName;
         this.email = email;
@@ -43,10 +43,10 @@ public class UserViewModel {
         this.email = email;
     }
 
-    public List<String> getRoles() {
+    public Set<String> getRoles() {
         return roles;
     }
-    public void setRoles(List<String> roles) {
+    public void setRoles(Set<String> roles) {
         this.roles = roles;
     }
 }

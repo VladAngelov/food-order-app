@@ -7,14 +7,12 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Set;
-
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
 public class Role implements Serializable {
     private static final long serialVersionUID = 1L;
-    public static final String WORKER = "WORKER";
     public static final String USER = "USER";
     public static final String ROLE_USER = "ROLE_USER";
     public static final String ROLE_ADMIN = "ROLE_ADMIN";
