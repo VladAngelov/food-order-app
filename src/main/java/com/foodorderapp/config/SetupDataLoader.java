@@ -40,9 +40,10 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
         // Create initial roles
         Role userRole = createRoleIfNotFound(Role.ROLE_USER);
         Role adminRole = createRoleIfNotFound(Role.ROLE_ADMIN);
-        createUserIfNotFound("admin@javachinna.com", Set.of(userRole, adminRole));
+        createUserIfNotFound("admin@foodorderapp.com", Set.of(userRole, adminRole));
         alreadySetup = true;
     }
+
 
     @Transactional
     private final User createUserIfNotFound(final String email, Set<Role> roles) {
