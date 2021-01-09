@@ -4,13 +4,18 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "orders")
 public class Order extends BaseEntity {
 
-//    @OneToMany(mappedBy="order")
-   // private List<Product> products;
+   // @OneToMany(mappedBy="order")
+//    @OneToMany(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "product_id", referencedColumnName = "product_id")
+//    private List<Product> products;
+
+    private Product product;
     private String userData;
     private String date;
     private BigDecimal sum;
@@ -25,18 +30,29 @@ public class Order extends BaseEntity {
             String date,
             BigDecimal sum,
             String address,
-            Boolean isActive
+            Boolean isActive,
+            Product product
+            //      List<Product> products
     ) {
-     //   this.products = new ArrayList<Product>();
+    //    this.products = products;
         this.userData = userData;
         this.date = date;
         this.sum = sum;
         this.address = address;
         this.isActive = isActive;
+        this.product = product;
     }
 
-//    @Column(name = "products", nullable = false)
-//    public List<Product> getProducts() {
+    @ManyToOne
+    public Product getProduct() {
+        return product;
+    }
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
+
+    //    public List<Product> getProducts() {
 //        return products;
 //    }
 //    public void setProduct(List<Product> products) {
@@ -82,5 +98,4 @@ public class Order extends BaseEntity {
     public void setActive(Boolean active) {
         isActive = active;
     }
-
 }

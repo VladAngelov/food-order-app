@@ -7,24 +7,8 @@ public class ProductViewModel {
     private String type;
     private Integer volume;
     private double price;
-   // private byte[] picture;
 
-    public ProductViewModel(
-            String id,
-            String name,
-            String content,
-            String type,
-            Integer volume,
-            double price
-          //  byte[] picture
-    ) {
-        this.id = id;
-        this.name = name;
-        this.content = content;
-        this.type = type;
-        this.volume = volume;
-        this.price = price;
-       // this.picture = picture;
+    public ProductViewModel( ) {
     }
 
     public String getId() {
@@ -68,11 +52,4 @@ public class ProductViewModel {
     public void setPrice(double price) {
         this.price = price;
     }
-
-//    public byte[] getPicture() {
-//        return picture;
-//    }
-//    public void setPicture(byte[] picture) {
-//        this.picture = picture;
-//    }
 }

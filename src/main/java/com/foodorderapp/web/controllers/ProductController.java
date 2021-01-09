@@ -29,20 +29,17 @@ import java.util.zip.Inflater;
 public class ProductController {
     private final ProductService productService;
     private final ModelMapper modelMapper;
-    private final ProductRepository productRepository;
 
     public ProductController(
             ProductService productService,
-            ModelMapper modelMapper,
-            ProductRepository productRepository
+            ModelMapper modelMapper
     ) {
         this.productService = productService;
         this.modelMapper = modelMapper;
-        this.productRepository = productRepository;
     }
 
     @GetMapping(path = Links.PRODUCTS_ALL)
-    public ResponseEntity<List<ProductViewModel>> getAllProducts(
+    public ResponseEntity<?> getAllProducts(
             @RequestParam(required = false) String name) {
         try {
             List<ProductViewModel> products = new ArrayList<ProductViewModel>();
@@ -91,19 +88,19 @@ public class ProductController {
     }
 
     @PostMapping(path = Links.PRODUCT_ADD)
-    public ResponseEntity<Product> addProduct(
-            @RequestBody Product productAddBindingModel ) {
+    public ResponseEntity<?> addProduct(
+            @RequestBody ProductAddBindingModel productAddBindingModel ) {
         try {
-            var product = this.productRepository.saveAndFlush(productAddBindingModel);
+           var productServiceModel =   this.modelMapper
+                       .map(productAddBindingModel, ProductServiceModel.class);
 
-//            ProductServiceModel product = this.productService.addProduct(
-//                    this.modelMapper
-//                            .map(productAddBindingModel, ProductServiceModel.class));
-//
-//            ProductViewModel productViewModel = this.modelMapper
-//                    .map(product, ProductViewModel.class);
+           ProductServiceModel product = this.productService
+            .addProduct(productServiceModel);
 
-            return new ResponseEntity<>(product, HttpStatus.OK);
+           ProductViewModel productViewModel = this.modelMapper
+                       .map(product, ProductViewModel.class);
+
+            return new ResponseEntity<>(productViewModel, HttpStatus.OK);
 
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);

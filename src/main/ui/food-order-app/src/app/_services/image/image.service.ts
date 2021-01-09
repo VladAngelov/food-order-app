@@ -25,17 +25,30 @@ export class ImageService {
   imageName: any;
 
   uploadImage(uploadImageData) {
-    this.http.post(this.BASE + this.IMAGE_POST,
+    debugger;
+    // this.http.post(this.BASE + this.IMAGE_POST,
+    //   uploadImageData,
+    //   {
+    //     headers: httpOptions.headers,
+    //     observe: 'response'
+    //   })
+    //   .subscribe(x => {
+    //     console.log(x);
+    //   });
+
+    this.http.post('http://localhost:8080/api/image/upload',
       uploadImageData,
-      httpOptions)
-      .subscribe(x => {
-        console.log(x);
+      { observe: 'response' })
+      .subscribe((response) => {
+        if (response.status === 200) {
+          console.log(this.message = 'Image uploaded successfully');
+        } else {
+          console.log(this.message = 'Image not uploaded successfully');
+        }
       });
   }
 
   getImage(name) {
-    //Make a call to Sprinf Boot to get the Image Bytes.
-
     this.http.get(this.BASE + this.IMAGE_GET + name, httpOptions)
       .subscribe(
         res => {

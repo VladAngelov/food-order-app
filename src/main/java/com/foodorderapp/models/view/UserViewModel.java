@@ -11,17 +11,6 @@ public class UserViewModel {
     public UserViewModel() {
     }
 
-    public UserViewModel(
-            String id,
-            String displayName,
-            String email,
-            Set<String> roles) {
-        this.id = id;
-        this.displayName = displayName;
-        this.email = email;
-        this.roles = roles;
-    }
-
     public String getId() {
         return id;
     }

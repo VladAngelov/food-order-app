@@ -5,8 +5,7 @@ public class ImageViewModel {
     private String type;
     private byte[] picByte;
 
-    public ImageViewModel() {
-    }
+    public ImageViewModel() { }
 
     public ImageViewModel(String name, String type, byte[] picByte) {
         this.name = name;

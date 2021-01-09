@@ -23,12 +23,9 @@ public class ImageServiceImpl implements ImageService {
 
     @Override
     public ImageServiceModel upload(ImageServiceModel imageServiceModel) {
-        return this.modelMapper
-                .map(
-                    this.imageRepository
-                            .saveAndFlush(this.modelMapper
-                                    .map(imageServiceModel, Image.class)),
-                    ImageServiceModel.class);
+        var img = this.modelMapper.map(imageServiceModel, Image.class);
+        this.imageRepository.save(img);
+        return this.modelMapper.map(img, ImageServiceModel.class);
     }
 
     @Override

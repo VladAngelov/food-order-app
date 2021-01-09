@@ -26,9 +26,9 @@ export class AppConstants {
     public static PRODUCT_DELETE_BY_ID: string = 'menu/delete/{id}';
     public static PRODUCT_BY_TYPE: string = 'menu/{type}';
 
-    public static PRODUCT_IMAGE_ADD: string = "image/upload";
+    public static PRODUCT_IMAGE_ADD: string = 'image/upload';
     public static PRODUCT_IMAGE_GET_BY_NAME: string = 'image/get/';
-    public static PRODUCT_IMAGE_EDIT: string = "image/edit";
+    public static PRODUCT_IMAGE_EDIT: string = 'image/edit';
     public static PRODUCT_IMAGE_DELETE: string = "image/delete/";
 
     public static PRODUCT_IMAGE_DATA_FORMAT = 'data:image/jpeg;base64,';

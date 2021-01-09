@@ -76,11 +76,14 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public ProductServiceModel addProduct(ProductServiceModel productServiceModel) {
         try {
-            this.productRepository.saveAndFlush(
-                    this.modelMapper
-                            .map(productServiceModel, Product.class));
 
-            return productServiceModel;
+            var product = this.modelMapper.map(productServiceModel, Product.class);
+
+            this.productRepository.save(product);
+
+            var productSM = this.modelMapper.map(product, ProductServiceModel.class);
+
+            return productSM;
 
         } catch (Exception e) {
             return null;

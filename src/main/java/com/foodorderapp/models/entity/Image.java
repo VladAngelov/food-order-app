@@ -39,7 +39,7 @@ public class Image extends  BaseEntity{
         this.type = type;
     }
 
-    @Column(name = "picByte", length = 1000, nullable = false)
+    @Column(name = "picByte", length = 1000000, nullable = false)
     public byte[] getPicByte() {
         return picByte;
     }

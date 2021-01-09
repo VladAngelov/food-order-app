@@ -8,27 +8,21 @@ import javax.validation.constraints.NotNull;
 
 public class ProductAddBindingModel {
 
+    private String id;
     private String name;
     private String content;
     private String type;
     private Integer volume;
     private double price;
-//    private byte[] picBytes;
 
-    public ProductAddBindingModel(
-            String name,
-            String content,
-            String type,
-            Integer volume,
-            double price
-//            byte[] picBytes
-    ) {
-        this.name = name;
-        this.content = content;
-        this.type = type;
-        this.volume = volume;
-        this.price = price;
-//        this.picBytes = picBytes;
+    public ProductAddBindingModel() {
+    }
+
+    public String getId() {
+        return id;
+    }
+    public void setId(String id) {
+        this.id = id;
     }
 
     @Length(min = 3, message = Errors.NAME_ERROR)
@@ -70,12 +64,4 @@ public class ProductAddBindingModel {
     public void setPrice(double price) {
         this.price = price;
     }
-
-//    @NotNull(message = Errors.IMAGE_ERROR)
-//    public byte[] getPicBytes() {
-//        return picBytes;
-//    }
-//    public void setPicBytes(byte[] picBytes) {
-//        this.picBytes = picBytes;
-//    }
 }

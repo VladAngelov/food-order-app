@@ -6,13 +6,14 @@ import javax.persistence.*;
 @Table(name = "products")
 public class Product extends BaseEntity {
 
+   // private Order order;
     private String name;
     private String content;
     private String type;
     private Integer volume;
     private double price;
    // private byte[] picBytes;
-    private Order order;
+    //private Order order;
 
     public Product() {
     }
@@ -22,8 +23,8 @@ public class Product extends BaseEntity {
             String content,
             String type,
             Integer volume,
-            double price,
-            Order order
+            double price
+      //      Order order
         //    byte[] picBytes
     ) {
         this.name = name;
@@ -31,7 +32,7 @@ public class Product extends BaseEntity {
         this.type = type;
         this.volume = volume;
         this.price = price;
-        this.order = order;
+    //    this.order = order;
       //  this.picBytes = picBytes;
     }
 
@@ -75,19 +76,4 @@ public class Product extends BaseEntity {
         this.price = price;
     }
 
-//    @Column(name = "picture", nullable = false, length = 1000)
-//    public byte[] getPicBytes() {
-//        return picBytes;
-//    }
-//    public void setPicBytes(byte[] picBytes) {
-//        this.picBytes = picBytes;
-//    }
-
-    @ManyToOne
-    public Order getOrder() {
-        return order;
-    }
-    public void setOrder(Order order) {
-        this.order = order;
-    }
 }

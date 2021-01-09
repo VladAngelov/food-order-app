@@ -15,24 +15,8 @@ public class ProductServiceModel {
     private String type;
     private Integer volume;
     private BigDecimal price;
-   // private byte[] picBytes;
 
-    public ProductServiceModel(
-            String id,
-            String name,
-            String content,
-            String type,
-            Integer volume,
-            BigDecimal price
-            //byte[] picBytes
-    ) {
-        this.id = id;
-        this.name = name;
-        this.content = content;
-        this.type = type;
-        this.volume = volume;
-        this.price = price;
-     //   this.picBytes = picBytes;
+    public ProductServiceModel() {
     }
 
     public String getId() {
@@ -82,11 +66,4 @@ public class ProductServiceModel {
         this.price = price;
     }
 
-//    @NotNull(message = Errors.IMAGE_ERROR)
-//    public byte[] getPicBytes() {
-//        return picBytes;
-//    }
-//    public void setPicBytes(byte[] picBytes) {
-//        this.picBytes = picBytes;
-//    }
 }

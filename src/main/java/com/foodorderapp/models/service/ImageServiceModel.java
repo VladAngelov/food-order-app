@@ -10,14 +10,7 @@ public class ImageServiceModel {
     private String type;
     private byte[] picByte;
 
-    public ImageServiceModel() {
-    }
-
-    public ImageServiceModel(String name, String type, byte[] picByte) {
-        this.name = name;
-        this.type = type;
-        this.picByte = picByte;
-    }
+    public ImageServiceModel() { }
 
     @NotNull
     public String getName() {

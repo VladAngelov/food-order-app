@@ -78,6 +78,7 @@ export class ProductAddComponent implements OnInit {
 
     this.onUpload(product.name);
     this.productService.addProduct(product);
+    this.router.navigate['/menu'];
   }
 
   public onFileChanged(event) {
