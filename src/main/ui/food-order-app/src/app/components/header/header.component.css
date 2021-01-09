@@ -1,0 +1,217 @@
+body {
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* --- Top black line --- */
+  
+  .address-line-and-fb-icon,
+  .address-line-and-fb-icon article,
+  .address ul {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0;
+  }
+  
+  .address-line-and-fb-icon {
+    background: black;
+    color: white;
+  }
+  
+  .address-line-and-fb-icon article {
+    margin: 0 50px;
+  }
+  
+  .address-line-and-fb-icon ul {
+    padding: 0;
+  }
+  
+  .address-line-and-fb-icon ul li p {
+    margin: 8px 0;
+  }
+  
+  .address-line-and-fb-icon .fb-icon {
+    color: #20c578;
+  }
+  
+  .address ul li {
+    list-style: none;
+    margin-right: 5px;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+  
+  @media all and (max-width: 940px) {
+    .address-line-and-fb-icon article {
+      margin: 0px 30px;
+    }
+  }
+  
+  .log-menu ul{
+    list-style: none;
+    display: flex;
+  }
+  
+  .log-menu ul li {
+    margin-left: 5px;
+  }
+  
+  .log-menu a {
+    text-decoration: none;
+    color: white;
+  }
+  
+  .log-menu a:hover {
+    cursor: pointer;
+  }
+  
+  /* --- Logo and info line --- */
+  
+  .logo-and-info-line {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px 50px;
+  }
+  
+  .logo-and-info-line .logo {
+    width: 200px;
+  }
+  
+  .logo-and-info-line ul {
+    margin: 0 200px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .logo-and-info-line ul li {
+    list-style: none;
+    padding: 0 30px;
+  }
+  
+  .logo-and-info-line ul li article {
+    display: flex;
+    align-items: center;
+  }
+  
+.logo-img  {
+  box-shadow: 0px 0px 14px 12px #EDEFF0;
+}
+
+  .contacts h4 {
+    margin: 15px auto;
+  }
+  
+  .contacts-icons {
+    color: #20c578;
+    margin-right: 10px;
+  }
+  
+  .navigation {
+    display: flex;
+    justify-content: center;
+    background: #20c578;
+    color: white;
+  }
+  
+  .navigation ul {
+    display: flex;
+    margin: 0px auto;
+  }
+  
+  .navigation ul li {
+    list-style: none;
+    padding: 5px 0;
+    margin: 0 16px;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+  }
+  
+  .navigation ul li a {
+    color: white;
+    text-decoration: none;
+  }
+  
+  .navigation ul li a:hover {
+    cursor: pointer;
+    color: #8f8f8f;
+  }
+  
+  .navigation ul li i {
+    position: relative;
+    top: -2px;
+    left: 2px;
+  }
+  
+  @media all and (max-width: 940px) {
+    .logo-and-info-line,
+    .logo-and-info-line ul {
+      flex-direction: column;
+    }
+  
+    .navigation ul {
+      flex-direction: column;
+    }
+  }
+  
+  /* ---  Style the dropdown menu --- */
+  
+  /* Style The Dropdown Button */
+  .dropbtn {
+    background-color: #20c578;
+    color: white;
+    padding: 16px 0;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  /* The container <div> - needed to position the dropdown content */
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+  /* Dropdown Content (Hidden by Default) */
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 0px 16px 0px rgba(0, 0, 0, 0.4);
+    z-index: 1;
+    border-radius: 8px;
+  }
+  
+  /* Links inside the dropdown */
+  .navigation ul li div.dropdown-content a {
+    color: #94959a;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    font-size: 15px;
+  }
+  
+  /* Change color of dropdown links on hover */
+  .navigation ul li div.dropdown-content a:hover {
+    background-color: #20c578;
+    color: white;
+  }
+  
+  /* Show the dropdown menu on hover */
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+  
+  /* Change the background color of the dropdown button when the dropdown content is shown */
+  .dropdown:hover .dropbtn {
+    cursor: pointer;
+    color: #8f8f8f;
+  }
+  
+  .groups-content {
+    min-width: 250px;
+  }
+  

@@ -1,0 +1,14 @@
+body {
+    width: 80%;
+    margin: auto;
+    /* min-height: 250px; */
+}
+
+div {
+    border-radius: 6px;
+    display: flex;
+    justify-content: center;
+    padding: 40px;
+    box-shadow: 0px 0px 18px -3px rgba(0, 0, 0, 0.75);
+    margin: 120px auto;
+}

@@ -1,0 +1,37 @@
+  section {
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    margin: 0px auto;
+    padding-top: 30px;
+  }
+
+  .copyright {
+    color: #94959a;
+    margin-top: 20px;
+    margin-left: auto;
+    margin-bottom: 0;
+    margin-right: auto;
+    padding-bottom: 20px;
+  }
+  
+  .copyright a {
+    text-decoration: none;
+    color: #94959a;
+  }
+
+  .copyright a:hover {
+color: white;
+  }
+
+  .footer-background {
+    background: #111;
+    opacity: 0.94;
+  }
+  
+  @media all and (max-width: 940px) {
+    section {
+      flex-direction: column;
+    }
+  }
+  

@@ -1,0 +1,60 @@
+<div class="new-food-border">
+    <div class="header-background">
+        <span>Нов продукт</span>
+    </div>
+    <form [formGroup]="form" (ngSubmit)="submitHandler()">
+        <div class="new-food-title">
+            <label for="name">Име <span class="red">*</span></label>
+            <input formControlName="name" type="text" name="name" id="name" required minlength="3">
+            <!-- <p class="error" *ngIf="form.get('name').touched && form.get('name').errors?.required">
+                Food name is required.
+            </p>
+            <p class="error" *ngIf="form.get('name').touched && form.get('name').errors?.minlength">
+                Food name must be at least 3 characters long.
+            </p> -->
+        </div>
+        <div class="new-food-content">
+            <label for="content">Описание <span class="red">*</span></label>
+            <textarea formControlName="content" type="text" name="content" id="content" rows="8" class="height" required
+                minlength="3">
+            </textarea>
+            <!-- <p class="error" *ngIf="content.touched && content.errors?.required">
+                The field with your food content is required.
+            </p>
+            <p class="error" *ngIf="content.touched && content.errors?.required">
+                Food content must be at least 5 characters long.
+            </p> -->
+        </div>
+
+        <div class="new-food-content">
+            <label for="foodType">Тип на продукта <span class="red">*</span></label>
+            <select id="foodType" formControlName="foodType">
+                <option [ngValue]="null">Избери...</option>
+                <option *ngFor="let foodType of foodTypes | keyvalue" [ngValue]="foodType.value">
+                    {{foodType.value}}
+                </option>
+            </select>
+        </div>
+
+        <div class="price-volume">
+            <div class="new-food-title">
+                <label for="price">Цена <span class="red">*</span></label>
+                <input formControlName="price" type="number" name="price" id="price" required min="0.01">
+                <label for="volume">Количество <span class="red">*</span></label>
+                <input formControlName="volume" type="number" name="volume" id="volume" required min="10">
+            </div>
+        </div>
+
+        <div class="new-food-content">
+            <label>Снимка</label>
+            <input type="file" required (change)="onFileChanged($event)">
+            <hr />
+            <div *ngIf=message>{{message}}</div>
+        </div>
+
+        <div class="new-food-buttons">
+            <button class="btn btn-add">Добави</button>
+            <button type="button" class="btn btn-cancel" routerLink="/">Откажи</button>
+        </div>
+    </form>
+</div>
