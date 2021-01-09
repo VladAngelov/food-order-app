@@ -3,28 +3,28 @@ package com.foodorderapp.models.view;
 public class ProductViewModel {
     private String id;
     private String name;
-    private String productDescription;
-    private String productType;
+    private String content;
+    private String type;
     private Integer volume;
     private double price;
-    private byte[] picture;
+   // private byte[] picture;
 
     public ProductViewModel(
             String id,
             String name,
-            String productDescription,
-            String productType,
+            String content,
+            String type,
             Integer volume,
-            double price,
-            byte[] picture
+            double price
+          //  byte[] picture
     ) {
         this.id = id;
         this.name = name;
-        this.productDescription = productDescription;
-        this.productType = productType;
+        this.content = content;
+        this.type = type;
         this.volume = volume;
         this.price = price;
-        this.picture = picture;
+       // this.picture = picture;
     }
 
     public String getId() {
@@ -41,18 +41,18 @@ public class ProductViewModel {
         this.name = name;
     }
 
-    public String getProductDescription() {
-        return productDescription;
+    public String getContent() {
+        return content;
     }
-    public void setProductDescription(String productDescription) {
-        this.productDescription = productDescription;
+    public void setContent(String content) {
+        this.content = content;
     }
 
-    public String getProductType() {
-        return productType;
+    public String getType() {
+        return type;
     }
-    public void setProductType(String productType) {
-        this.productType = productType;
+    public void setType(String type) {
+        this.type = type;
     }
 
     public Integer getVolume() {
@@ -69,10 +69,10 @@ public class ProductViewModel {
         this.price = price;
     }
 
-    public byte[] getPicture() {
-        return picture;
-    }
-    public void setPicture(byte[] picture) {
-        this.picture = picture;
-    }
+//    public byte[] getPicture() {
+//        return picture;
+//    }
+//    public void setPicture(byte[] picture) {
+//        this.picture = picture;
+//    }
 }

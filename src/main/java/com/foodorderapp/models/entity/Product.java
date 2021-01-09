@@ -7,11 +7,11 @@ import javax.persistence.*;
 public class Product extends BaseEntity {
 
     private String name;
-    private String productDescription;
+    private String content;
     private String type;
     private Integer volume;
     private double price;
-    private byte[] picBytes;
+   // private byte[] picBytes;
     private Order order;
 
     public Product() {
@@ -19,45 +19,42 @@ public class Product extends BaseEntity {
 
     public Product(
             String name,
-            String productDescription,
+            String content,
             String type,
             Integer volume,
             double price,
-            Order order,
-            byte[] picBytes
+            Order order
+        //    byte[] picBytes
     ) {
         this.name = name;
-        this.productDescription = productDescription;
+        this.content = content;
         this.type = type;
         this.volume = volume;
         this.price = price;
         this.order = order;
-        this.picBytes = picBytes;
+      //  this.picBytes = picBytes;
     }
 
     @Column(name = "name", unique = true, nullable = false)
     public String getName() {
         return name;
     }
-
     public void setName(String name) {
         this.name = name;
     }
 
     @Column(name = "description", nullable = false)
-    public String getProductDescription() {
-        return productDescription;
+    public String getContent() {
+        return content;
     }
-
-    public void setProductDescription(String productDescription) {
-        this.productDescription = productDescription;
+    public void setContent(String content) {
+        this.content = content;
     }
 
     @Column(name = "type", nullable = false)
     public String getType() {
         return type;
     }
-
     public void setType(String type) {
         this.type = type;
     }
@@ -66,7 +63,6 @@ public class Product extends BaseEntity {
     public Integer getVolume() {
         return volume;
     }
-
     public void setVolume(Integer volume) {
         this.volume = volume;
     }
@@ -75,18 +71,17 @@ public class Product extends BaseEntity {
     public double getPrice() {
         return price;
     }
-
     public void setPrice(double price) {
         this.price = price;
     }
 
-    @Column(name = "picture", nullable = false, length = 1000)
-    public byte[] getPicBytes() {
-        return picBytes;
-    }
-    public void setPicBytes(byte[] picBytes) {
-        this.picBytes = picBytes;
-    }
+//    @Column(name = "picture", nullable = false, length = 1000)
+//    public byte[] getPicBytes() {
+//        return picBytes;
+//    }
+//    public void setPicBytes(byte[] picBytes) {
+//        this.picBytes = picBytes;
+//    }
 
     @ManyToOne
     public Order getOrder() {

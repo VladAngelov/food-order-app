@@ -3,8 +3,10 @@ package com.foodorderapp.web.controllers;
 import com.foodorderapp.constants.Links;
 import com.foodorderapp.models.binding.product.ProductAddBindingModel;
 import com.foodorderapp.models.binding.product.ProductEditBindingModel;
+import com.foodorderapp.models.entity.Product;
 import com.foodorderapp.models.service.ProductServiceModel;
 import com.foodorderapp.models.view.ProductViewModel;
+import com.foodorderapp.repositories.ProductRepository;
 import com.foodorderapp.services.interfaces.ProductService;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
@@ -27,13 +29,16 @@ import java.util.zip.Inflater;
 public class ProductController {
     private final ProductService productService;
     private final ModelMapper modelMapper;
+    private final ProductRepository productRepository;
 
     public ProductController(
             ProductService productService,
-            ModelMapper modelMapper
+            ModelMapper modelMapper,
+            ProductRepository productRepository
     ) {
         this.productService = productService;
         this.modelMapper = modelMapper;
+        this.productRepository = productRepository;
     }
 
     @GetMapping(path = Links.PRODUCTS_ALL)
@@ -48,9 +53,6 @@ public class ProductController {
                     ProductViewModel productViewModel =
                             this.modelMapper
                             .map(product, ProductViewModel.class);
-                    productViewModel.setPicture(
-                            decompressBytes(product.getPicBytes())
-                    );
                     products.add(productViewModel);
                 }
             }
@@ -80,11 +82,8 @@ public class ProductController {
         ProductViewModel product = this.modelMapper
                 .map(productServiceModel, ProductViewModel.class);
 
-        product.setPicture(decompressBytes(productServiceModel.getPicBytes()));
-
-        Optional<ProductViewModel> productOp = Optional.of(product);
-
-        if (productOp.isPresent()) {
+        if (product.getName() != null) {
+            Optional<ProductViewModel> productOp = Optional.of(product);
             return new ResponseEntity<>(productOp.get(), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -92,20 +91,19 @@ public class ProductController {
     }
 
     @PostMapping(path = Links.PRODUCT_ADD)
-    public ResponseEntity<ProductViewModel> addProduct(
-            @RequestBody ProductAddBindingModel productAddBindingModel,
-            @RequestParam("imageFile") MultipartFile file) {
+    public ResponseEntity<Product> addProduct(
+            @RequestBody Product productAddBindingModel ) {
         try {
-            productAddBindingModel.setPicBytes(compressBytes(file.getBytes()));
+            var product = this.productRepository.saveAndFlush(productAddBindingModel);
 
-            ProductServiceModel product = this.productService.addProduct(
-                    this.modelMapper
-                            .map(productAddBindingModel, ProductServiceModel.class));
+//            ProductServiceModel product = this.productService.addProduct(
+//                    this.modelMapper
+//                            .map(productAddBindingModel, ProductServiceModel.class));
+//
+//            ProductViewModel productViewModel = this.modelMapper
+//                    .map(product, ProductViewModel.class);
 
-            ProductViewModel productViewModel = this.modelMapper
-                    .map(product, ProductViewModel.class);
-
-            return new ResponseEntity<>(productViewModel, HttpStatus.OK);
+            return new ResponseEntity<>(product, HttpStatus.OK);
 
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -115,39 +113,38 @@ public class ProductController {
     @PutMapping(path = Links.PRODUCT_EDIT_BY_ID)
     public ResponseEntity<ProductViewModel> editProduct(
             @PathVariable("id") String id,
-            @RequestBody ProductEditBindingModel productEditBindingModel,
-            @RequestParam("imageFile") MultipartFile file) {
-try {
-        ProductEditBindingModel productData = this.modelMapper
-                        .map(this.productService.findById(id),
-                                ProductEditBindingModel.class);
+            @RequestBody ProductEditBindingModel productEditBindingModel) {
+        try {
+            ProductEditBindingModel productData = this.modelMapper
+                            .map(this.productService.findById(id),
+                                    ProductEditBindingModel.class);
 
-        Optional<ProductEditBindingModel> productOptional =
-                Optional.ofNullable(productData);
+            Optional<ProductEditBindingModel> productOptional =
+                    Optional.ofNullable(productData);
 
-        if (productOptional.isPresent()) {
-            ProductEditBindingModel product = productOptional.get();
-            product.setName(productEditBindingModel.getName());
-            product.setProductDescription(productEditBindingModel.getProductDescription());
-            product.setProductType(productEditBindingModel.getProductType());
-            product.setVolume(productEditBindingModel.getVolume());
-            product.setPrice(productEditBindingModel.getPrice());
-            product.setPicBytes(compressBytes(file.getBytes()));
+            if (productOptional.isPresent()) {
+                ProductEditBindingModel product = productOptional.get();
+                product.setName(productEditBindingModel.getName());
+                product.setContent(productEditBindingModel.getContent());
+                product.setType(productEditBindingModel.getType());
+                product.setVolume(productEditBindingModel.getVolume());
+                product.setPrice(productEditBindingModel.getPrice());
+               // product.setPicBytes(compressBytes(file.getBytes()));
 
-            ProductServiceModel productServiceModel = this.modelMapper
-                    .map(product, ProductServiceModel.class);
+                ProductServiceModel productServiceModel = this.modelMapper
+                        .map(product, ProductServiceModel.class);
 
-            return new ResponseEntity<>(
-                    this.modelMapper.map(
-                            this.productService.addProduct(productServiceModel),
-                            ProductViewModel.class),
-                    HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+                return new ResponseEntity<>(
+                        this.modelMapper.map(
+                                this.productService.addProduct(productServiceModel),
+                                ProductViewModel.class),
+                        HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+                }
+            } catch (Exception e) {
+                return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
             }
-        } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
     }
 
     @DeleteMapping(path = Links.PRODUCT_DELETE_BY_ID)

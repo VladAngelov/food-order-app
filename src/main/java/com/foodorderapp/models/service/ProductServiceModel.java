@@ -11,28 +11,28 @@ public class ProductServiceModel {
 
     private String id;
     private String name;
-    private String productDescription;
-    private String productType;
+    private String content;
+    private String type;
     private Integer volume;
     private BigDecimal price;
-    private byte[] picBytes;
+   // private byte[] picBytes;
 
     public ProductServiceModel(
             String id,
             String name,
-            String productDescription,
-            String productType,
+            String content,
+            String type,
             Integer volume,
-            BigDecimal price,
-            byte[] picBytes
+            BigDecimal price
+            //byte[] picBytes
     ) {
         this.id = id;
         this.name = name;
-        this.productDescription = productDescription;
-        this.productType = productType;
+        this.content = content;
+        this.type = type;
         this.volume = volume;
         this.price = price;
-        this.picBytes = picBytes;
+     //   this.picBytes = picBytes;
     }
 
     public String getId() {
@@ -51,19 +51,19 @@ public class ProductServiceModel {
     }
 
     @Length(min = 3, message = Errors.DESCRIPTION_ERROR)
-    public String getProductDescription() {
-        return productDescription;
+    public String getContent() {
+        return content;
     }
-    public void setProductDescription(String productDescription) {
-        this.productDescription = productDescription;
+    public void setContent(String content) {
+        this.content = content;
     }
 
     @Length(min = 4, message = Errors.PRODUCT_TYPE_ERROR)
-    public String getProductType() {
-        return productType;
+    public String getType() {
+        return type;
     }
-    public void setProductType(String productType) {
-        this.productType = productType;
+    public void setType(String type) {
+        this.type = type;
     }
 
     @Min(value = 10, message = Errors.VOLUME_ERROR)
@@ -82,11 +82,11 @@ public class ProductServiceModel {
         this.price = price;
     }
 
-    @NotNull(message = Errors.IMAGE_ERROR)
-    public byte[] getPicBytes() {
-        return picBytes;
-    }
-    public void setPicBytes(byte[] picBytes) {
-        this.picBytes = picBytes;
-    }
+//    @NotNull(message = Errors.IMAGE_ERROR)
+//    public byte[] getPicBytes() {
+//        return picBytes;
+//    }
+//    public void setPicBytes(byte[] picBytes) {
+//        this.picBytes = picBytes;
+//    }
 }

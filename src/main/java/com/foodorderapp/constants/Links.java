@@ -6,10 +6,8 @@ public class Links {
     public static final String API = "/api";
     public static final String API_AUTH = "/api/auth";
 
-
     // --- HOME --- //
     public static final String HOME = "/home";
-
 
     // --- PRODUCTS --- //
     public static final String PRODUCTS = "/menu";
@@ -20,15 +18,17 @@ public class Links {
     public static final String PRODUCT_BY_ID = "/menu/{id}";
     public static final String PRODUCT_BY_TYPE = "/menu/{type}";
 
-
     // --- WORKER --- //
-    public static final String WORKER = "/worker";
     public static final String WORKERS_LOG_IN = "/signin";
     public static final String WORKERS_REGISTER = "/signup";
-    public static final String WORKERS_LOG_OUT = "/worker/logout/{username}";
-
 
     // --- USER --- //
     public static final String USER = "/user";
     public static final String USER_CURRENT = "/user/me";
+
+    // --- IMAGE --- //
+    public static final String IMAGE_ADD = "/image/upload";
+    public static final String IMAGE_GET = "/image/get/{name}";
+    public static final String IMAGE_DELETE = "/image/delete/{name}";
+    public static final String IMAGE_EDIT = "/image/edit";
 }
