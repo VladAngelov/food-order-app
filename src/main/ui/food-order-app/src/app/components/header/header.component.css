@@ -4,7 +4,11 @@ body {
   }
   
   /* --- Top black line --- */
-  
+    
+  ul li a:hover {
+    color: gray;
+  }
+
   .address-line-and-fb-icon,
   .address-line-and-fb-icon article,
   .address ul {

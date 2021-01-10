@@ -52,8 +52,8 @@ public class ImageServiceImpl implements ImageService {
 
     @Override
     public ImageServiceModel findByName(String name) {
-        return this.modelMapper
-                .map(this.imageRepository.findByName(name),
-                        ImageServiceModel.class);
+        var img = this.imageRepository.findByName(name);
+
+        return this.modelMapper.map(img, ImageServiceModel.class);
     }
 }

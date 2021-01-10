@@ -17,21 +17,7 @@ public class OrderAddBindingModel {
     private String address;
     private Boolean isActive;
 
-    public OrderAddBindingModel(
-            List<ProductServiceModel> products,
-            String userData,
-            LocalDateTime date,
-            BigDecimal sum,
-            String address,
-            Boolean isActive
-    ) {
-        this.products = products;
-        this.userData = userData;
-        this.date = date;
-        this.sum = sum;
-        this.address = address;
-        this.isActive = isActive;
-    }
+    public OrderAddBindingModel( ) { }
 
     @NotNull
     public List<ProductServiceModel> getProducts() {

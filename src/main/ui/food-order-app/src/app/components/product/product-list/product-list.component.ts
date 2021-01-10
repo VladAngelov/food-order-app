@@ -3,8 +3,11 @@ import {
   OnInit
 } from '@angular/core';
 import { Router } from '@angular/router';
+
 import { AppConstants } from 'src/app/constants/app.constants';
+import { ImageModel } from 'src/app/models/Image';
 import { Product } from 'src/app/models/product';
+import { ImageService } from 'src/app/_services/image/image.service';
 import { ProductService } from 'src/app/_services/product/product.service';
 import { TokenStorageService } from 'src/app/_services/token/token-storage.service';
 
@@ -14,6 +17,10 @@ import { TokenStorageService } from 'src/app/_services/token/token-storage.servi
   styleUrls: ['./product-list.component.css']
 })
 export class ProductListComponent implements OnInit {
+  photos: ImageModel[] = [];
+  photoUrl: string;
+  base64Data: any;
+  retrieveResonse: any;
 
   products: Product[] = [];
   salads: Product[] = [];
@@ -27,31 +34,35 @@ export class ProductListComponent implements OnInit {
   isLoggedIn = false;
   isAdmin = false;
 
-  //Make a call to Sprinf Boot to get the Image Bytes.
-  retrievedImage: any;
-  base64Data: any;
-  retrieveResonse: any;
+
   PRODUCT_IMAGE_DATA_FORMAT = AppConstants.PRODUCT_IMAGE_DATA_FORMAT;
   HOME = AppConstants.HOME_URL;
 
   constructor(
     private productService: ProductService,
     private tokenStorageService: TokenStorageService,
-    private router: Router
+    private router: Router,
+    private imageService: ImageService
   ) { }
 
   ngOnInit(): void {
     this.productService.getAll()
-      .subscribe(p => {
-        if (p != null) {
+      .subscribe(products => {
+        for (var p of products) {
           let product = new Product();
           product.id = p.id,
             product.name = p.name,
             product.content = p.content,
             product.price = p.price,
             product.volume = p.volume,
-            product.picture = this.PRODUCT_IMAGE_DATA_FORMAT + p.picture,
-            product.type = p.type
+            product.type = p.type;
+
+          this.imageService.getImage(product.name).subscribe(
+            res => {
+              this.retrieveResonse = res;
+              this.base64Data = this.retrieveResonse.picByte;
+              product.picture = 'data:image/jpeg;base64,' + this.base64Data;
+            })
 
           this.products.push(product);
           this.sortProducts(product);
@@ -66,12 +77,7 @@ export class ProductListComponent implements OnInit {
       this.isAdmin = this.roles.includes('ROLE_ADMIN');
     }
     this.redirecting();
-  }
 
-  redirecting() {
-    if (!this.isLoggedIn) {
-      this.router.navigate[`${this.HOME}`];
-    }
   }
 
   sortProducts(prduct: Product): void {
@@ -110,15 +116,9 @@ export class ProductListComponent implements OnInit {
     this.order.push(product);
   }
 
-  // onGetImage(imageName: string) {
-  //   this.productService.getImage(imageName)
-  //     .subscribe(
-  //       res => {
-  //         this.retrieveResonse = res;
-  //         this.base64Data = this.retrieveResonse.picByte;
-  //         this.retrievedImage = `${this.PRODUCT_IMAGE_DATA_FORMAT}${this.base64Data}`;
-  //       }
-  //     );
-  // }
-
+  redirecting() {
+    if (!this.isLoggedIn) {
+      this.router.navigate[`${this.HOME}`];
+    }
+  }
 }

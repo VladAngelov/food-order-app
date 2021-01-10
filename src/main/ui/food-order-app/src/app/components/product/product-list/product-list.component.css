@@ -14,28 +14,39 @@ i {
 ul {
     border-bottom: 1px solid grey;
 }
+h3, p {
+    color: grey;
+}
+ul h2, 
+ul li h3{
+    margin: 30px auto 15px auto;
+    border-bottom: 1px solid grey;
+}
 
 .ul-st {
     display: flex;
+    flex-direction: column;
     margin: 30px auto;
     align-items: center;
 }
 
 .ul-st li {
     display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
+    margin: 15px 0;
+    align-self: start;
+    align-items: center;
 }
 
+.product-content {
+ display: flex;
+ flex-direction: column;
+ margin-left: 4rem;
+}
+ 
 .btn {
-    width: 100px;
-    padding: 8px;
-    border-radius: 6px;
-    border: none;
-    text-align: center;
-    margin: 5px 10px;
+    margin: 5px 4rem;
   }
-  
+  /*
   .btn-add {
   border: 1px solid green;
   background: white;
@@ -48,7 +59,7 @@ ul {
     background: green;
     cursor: pointer;
   box-shadow: 0px 0px 30px 2px green;
-  }
+  } */
 
   .inner-li {
       margin: 0 20px;

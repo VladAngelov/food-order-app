@@ -61,21 +61,19 @@
 
     <section class="navigation">
         <nav>
-            <ul *ngIf="isLoggedIn">
-                <li>
+            <ul>
+                <li *ngIf="isLoggedIn">
                     <a routerLink="/menu"> МЕНЮ </a>
                 </li>
-                <li *ngIf="isAdmin">
+                <li *ngIf="isAdmin && isLoggedIn">
                     <a routerLink="/menu/add">ДОБАВИ ПРОДУКТ</a>
                 </li>
-                <li>
+                <li *ngIf="isLoggedIn">
                     <a routerLink="/order/add">КОШНИЦА</a>
                 </li>
-                <li *ngIf="isAdmin">
+                <li *ngIf="isAdmin && isLoggedIn">
                     <a routerLink="/order/all">ПОРЪЧКИ</a>
                 </li>
-            </ul>
-            <ul>
                 <li>
                     <a routerLink="/contacts">КОНТАКТИ</a>
                 </li>

@@ -13,20 +13,7 @@ public class OrderEditBindingModel {
     private String address;
     private Boolean isActive;
 
-    public OrderEditBindingModel(
-            Set<ProductServiceModel> products,
-            String userData,
-            LocalDateTime date,
-            BigDecimal sum,
-            String address,
-            Boolean isActive) {
-        this.products = products;
-        this.userData = userData;
-        this.date = date;
-        this.sum = sum;
-        this.address = address;
-        this.isActive = isActive;
-    }
+    public OrderEditBindingModel() { }
 
     public Set<ProductServiceModel> getProducts() {
         return products;

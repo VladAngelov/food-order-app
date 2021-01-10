@@ -51,15 +51,15 @@ public class ImageController {
     @GetMapping(path = Links.IMAGE_GET)
     public ImageViewModel getImage(@PathVariable("name") String name) throws IOException {
 
-        final Optional<ImageViewModel> retrievedImage =
-           Optional.of(this.modelMapper
-                    .map(this.imageService.findByName(name),
-                            ImageViewModel.class));
+        var image = this.imageService.findByName(name);
+
+        ImageViewModel retrievedImage = (this.modelMapper
+                .map(image, ImageViewModel.class));
 
         ImageViewModel img = new ImageViewModel(
-                retrievedImage.get().getName(),
-                retrievedImage.get().getType(),
-                decompressBytes(retrievedImage.get().getPicByte()));
+                retrievedImage.getName(),
+                retrievedImage.getType(),
+                decompressBytes(retrievedImage.getPicByte()));
 
         return img;
     }

@@ -14,23 +14,14 @@ export class ProductService {
 
   getAll(): Observable<any> {
     return this.http.get(AppConstants.BASE_API_URL + AppConstants.PRODUCT_ALL_URL, httpOptions);
-    //return this.http.get(AppConstants.BASE_API_URL + AppConstants.PRODUCT_ALL_URL, { responseType: 'text' });
   }
 
   addProduct(product) {
-    debugger;
-    return this.http.post(AppConstants.BASE_API_URL + AppConstants.PRODUCT_ADD_URL, product, httpOptions).subscribe({
-      next: () => {
-        x => console.log('X --->>> ', x);
-      },
-      error: (err) => {
-        console.log(err);
-      }
-    });
+    return this.http.post(AppConstants.BASE_API_URL + AppConstants.PRODUCT_ADD_URL, product, httpOptions);
   }
 
   getById(id: string) {
-    return this.http.get(AppConstants.BASE_API_URL + AppConstants.PRODUCT_BY_ID, httpOptions);
+    return this.http.get(AppConstants.BASE_API_URL + AppConstants.PRODUCT_BY_ID + id, httpOptions);
   }
 
   editProduct(product) {

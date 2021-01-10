@@ -39,12 +39,10 @@ public class ProductController {
     }
 
     @GetMapping(path = Links.PRODUCTS_ALL)
-    public ResponseEntity<?> getAllProducts(
-            @RequestParam(required = false) String name) {
+    public ResponseEntity<?> getAllProducts() {
         try {
             List<ProductViewModel> products = new ArrayList<ProductViewModel>();
 
-            if (name == null) {
                 var ps = this.productService.findAll();
                 for (var product : ps) {
                     ProductViewModel productViewModel =
@@ -52,12 +50,6 @@ public class ProductController {
                             .map(product, ProductViewModel.class);
                     products.add(productViewModel);
                 }
-            }
-            else{
-                products.add(this.modelMapper
-                        .map(this.productService.findByName(name),
-                             ProductViewModel.class));
-            }
 
             if (products.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);

@@ -14,25 +14,8 @@ public class ProductEditBindingModel {
     private String type;
     private Integer volume;
     private double price;
-//    private byte[] picBytes;
 
-    public ProductEditBindingModel(
-            String id,
-            String name,
-            String content,
-            String type,
-            Integer volume,
-            double price
-           // byte[] picBytes
-    ) {
-        this.id = id;
-        this.name = name;
-        this.content = content;
-        this.type = type;
-        this.volume = volume;
-        this.price = price;
-//        this.picBytes = picBytes;
-    }
+    public ProductEditBindingModel() { }
 
     public String getId() {
         return id;
@@ -80,12 +63,4 @@ public class ProductEditBindingModel {
     public void setPrice(double price) {
         this.price = price;
     }
-
-//    @NotNull(message = Errors.IMAGE_ERROR)
-//    public byte[] getPicBytes() {
-//        return picBytes;
-//    }
-//    public void setPicBytes(byte[] picBytes) {
-//        this.picBytes = picBytes;
-//    }
 }
