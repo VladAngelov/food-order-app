@@ -1,9 +1,16 @@
-import { HttpClient } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpHeaders
+} from '@angular/common/http';
 import { Injectable } from '@angular/core';
+
 import { AppConstants } from 'src/app/constants/app.constants';
 import { IProduct } from 'src/app/interfaces/product';
 import { Product } from 'src/app/models/product';
 
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
 
 @Injectable()
 export class OrderService {
@@ -15,16 +22,12 @@ export class OrderService {
 
   transfer(productsInOrder: IProduct[]) {
     this.products = productsInOrder;
-
-    console.log('Products in service -->>', this.products);
-  }
-
-  getProducts() {
-    return this.products;
   }
 
   addOrder(order) {
-    // this.http.post();
+    this.http.post(this.BASE + this.ADD, order, httpOptions).subscribe(x => {
+      console.log('X -->> ', x);
+    });
   }
 
 }

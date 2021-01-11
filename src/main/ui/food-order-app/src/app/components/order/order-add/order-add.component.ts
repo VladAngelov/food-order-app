@@ -8,6 +8,7 @@ import {
   Validators
 } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AppConstants } from 'src/app/constants/app.constants';
 
 import { IProduct } from 'src/app/interfaces/product';
 import { Order } from 'src/app/models/order';
@@ -52,6 +53,8 @@ export class OrderAddComponent implements OnInit {
     }
     this.products = this.orderService.products;
     this.calcFee();
+
+    console.log('On init ->', this.products);
   }
 
   calcFee() {
@@ -80,9 +83,11 @@ export class OrderAddComponent implements OnInit {
   }
 
   onCancel() {
-    this.products = null;
-    this.router.navigate(['/']);
+    for (let p of this.products) {
+      let index = this.products.indexOf(p);
+      this.products.splice(index, 1);
+    }
+    this.router.navigate([AppConstants.HOME_URL]);
   }
-
 
 }

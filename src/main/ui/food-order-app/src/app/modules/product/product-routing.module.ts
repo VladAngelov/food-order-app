@@ -10,7 +10,7 @@ const ADD = AppConstants.ADD_URL;
 
 const routes: Routes = [
     {
-        path: `${MENU}`,
+        path: MENU,
         children: [
             {
                 path: '',
@@ -18,11 +18,11 @@ const routes: Routes = [
                 component: ProductListComponent
             },
             {
-                path: `${ADD}`,
+                path: ADD,
                 component: ProductAddComponent
             },
             {
-                path: `${EDIT}`,
+                path: EDIT,
                 component: ProductEditComponent
             }
         ]

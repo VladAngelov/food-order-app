@@ -1,1 +1,48 @@
-<p>product-edit works!</p>
+<div class="new-food-border">
+    <div class="header-background">
+        <span>Нов продукт</span>
+    </div>
+    <form [formGroup]="form" (ngSubmit)="submitHandler()">
+        <div class="new-food-title">
+            <label for="name">Име</label>
+            <input formControlName="name" type="text" name="name" id="name" placeholder="{{ product.name }}">
+        </div>
+        <div class="new-food-content">
+            <label for="content">Описание</label>
+            <textarea formControlName="content" type="text" name="content" id="content" rows="8" class="height"
+                placeholder="{{ product.content }}">
+            </textarea>
+        </div>
+
+        <div class="new-food-content">
+            <label for="foodType">Тип на продукта</label>
+            <select id="foodType" formControlName="foodType">
+                <option [ngValue]="null" disabled>Избери...</option>
+                <option *ngFor="let foodType of foodTypes | keyvalue" [ngValue]="foodType.value">
+                    {{foodType.value}}
+                </option>
+            </select>
+        </div>
+
+        <div class="price-volume">
+            <div class="new-food-title">
+                <label for="price">Цена</label>
+                <input formControlName="price" type="number" name="price" id="price" min="0.01">
+                <label for="volume">Количество</label>
+                <input formControlName="volume" type="number" name="volume" id="volume" min="10">
+            </div>
+        </div>
+
+        <div class="new-food-content">
+            <label>Снимка</label>
+            <input type="file" (change)="onFileChanged($event)">
+            <hr />
+            <div *ngIf=message>{{message}}</div>
+        </div>
+
+        <div class="new-food-buttons">
+            <button class="btn btn-add" [disabled]="isLoading">Добави</button>
+            <button type="button" class="btn btn-cancel" routerLink="/">Откажи</button>
+        </div>
+    </form>
+</div>

@@ -12,24 +12,15 @@
                 </li>
             </ul>
         </div>
-        <!-- <div class="btn-order">
-            <button class="btn btn-add" (click)="onSubmit()">Поръчай</button>
-            <button class="btn btn-danger" (click)="onCancel()">Откажи</button>
-        </div> -->
     </div>
 
     <div *ngIf="products.length > 0" class="bill">
         <h2>Въведете адрес за доставка: *</h2>
         <div class="product-content">
             <form [formGroup]="form" (ngSubmit)="onSubmit()">
-
-                <label for="address">Адрес <span class="red">*</span></label>
-                <!-- <input formControlName="" type="text" name="address" id="address" required minlength="3"
-                    placeholder=""> -->
                 <textarea formControlName="address" type="text" name="content" id="content" rows="3" cols="40"
                     class="height" required placeholder="улица, блок, №, етаж...">
                 </textarea>
-
                 <p class="error" *ngIf="form.get('address').touched && form.get('address').errors?.required">
                     Адресът е задължителен!
                 </p>

@@ -61,7 +61,7 @@ export class ProductAddComponent implements OnInit {
   }
   redirecting() {
     if (!this.isAdmin && !this.isLoggedIn) {
-      this.router.navigate[`${this.HOME}`];
+      this.router.navigate([this.HOME]);
     }
   }
 
