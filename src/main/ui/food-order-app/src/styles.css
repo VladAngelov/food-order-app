@@ -32,8 +32,8 @@ html {
   margin: 0 auto 0 auto;
 }
 
-.btn:disabled {
-  cursor:not-allowed;
+button:hover:disabled {
+  cursor: not-allowed;
 }
 
 .btn {

@@ -23,8 +23,8 @@ export class OrderService {
     return this.products;
   }
 
-  // addOrder(order) {
-  //   this.http.post();
-  // }
+  addOrder(order) {
+    // this.http.post();
+  }
 
 }

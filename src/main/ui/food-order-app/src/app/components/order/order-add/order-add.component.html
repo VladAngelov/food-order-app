@@ -24,8 +24,11 @@
             <form [formGroup]="form" (ngSubmit)="onSubmit()">
 
                 <label for="address">Адрес <span class="red">*</span></label>
-                <input formControlName="address" type="text" name="address" id="address" required minlength="3"
-                    placeholder="улица, блок, №, етаж...">
+                <!-- <input formControlName="" type="text" name="address" id="address" required minlength="3"
+                    placeholder=""> -->
+                <textarea formControlName="address" type="text" name="content" id="content" rows="3" cols="40"
+                    class="height" required placeholder="улица, блок, №, етаж...">
+                </textarea>
 
                 <p class="error" *ngIf="form.get('address').touched && form.get('address').errors?.required">
                     Адресът е задължителен!
@@ -34,11 +37,12 @@
                 Address must be at least 3 characters long.
             </p>
                -->
+                <div class="btn-order">
+                    <button class="btn btn-add" [disabled]="isLoading || form.invalid"
+                        (click)="onSubmit()">Поръчай</button>
+                    <button class="btn btn-danger" (click)="onCancel()">Откажи</button>
+                </div>
             </form>
-        </div>
-        <div class="btn-order">
-            <button class="btn btn-add" (click)="onSubmit()">Поръчай</button>
-            <button class="btn btn-danger" (click)="onCancel()">Откажи</button>
         </div>
     </div>
 

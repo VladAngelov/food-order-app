@@ -1,6 +1,14 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  Component,
+  OnInit
+} from '@angular/core';
+import {
+  FormControl,
+  FormGroup,
+  Validators
+} from '@angular/forms';
 import { Router } from '@angular/router';
+
 import { IProduct } from 'src/app/interfaces/product';
 import { Order } from 'src/app/models/order';
 import { OrderService } from 'src/app/_services/order/order.service';
@@ -12,7 +20,7 @@ import { TokenStorageService } from 'src/app/_services/token/token-storage.servi
   styleUrls: ['./order-add.component.css']
 })
 export class OrderAddComponent implements OnInit {
-
+  isLoading = false;
   minPrice = 5;
   fee = 0.0;
   products: IProduct[] = [];
@@ -32,13 +40,15 @@ export class OrderAddComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.isLoading = true;
+
     this.isLoggedIn = !!this.tokenStorageService.getToken();
 
     if (this.isLoggedIn) {
       const user = this.tokenStorageService.getUser();
       this.roles = user.roles;
       this.isAdmin = this.roles.includes('ROLE_ADMIN');
-      console.log('USER --->>> ', this.userData = JSON.stringify(user));
+      this.userData = JSON.stringify(user);
     }
     this.products = this.orderService.products;
     this.calcFee();
@@ -48,6 +58,8 @@ export class OrderAddComponent implements OnInit {
     for (var product of this.products) {
       this.fee = this.fee + product.price;
     }
+
+    this.isLoading = false;
   }
 
   remove(product) {
@@ -56,19 +68,20 @@ export class OrderAddComponent implements OnInit {
   }
 
   onSubmit() {
-    // this.orderService.addOrder(this.productsForOrder);
     let order = new Order();
     order.address = this.form.controls['address'].value;
     order.date = new Date().toLocaleDateString();
     order.isActive = true;
     order.products = this.products;
     order.sum = this.fee;
+    order.userData = this.userData;
 
+    this.orderService.addOrder(order);
   }
 
   onCancel() {
     this.products = null;
-    this.router.navigate['/'];
+    this.router.navigate(['/']);
   }
 
 

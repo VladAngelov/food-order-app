@@ -34,7 +34,7 @@ export class HomeComponent implements OnInit {
 
   redirecting() {
     if (this.isLoggedIn) {
-      this.router.navigate[AppConstants.PRODUCT_URL];
+      this.router.navigate([AppConstants.PRODUCT_URL]);
     }
   }
 }

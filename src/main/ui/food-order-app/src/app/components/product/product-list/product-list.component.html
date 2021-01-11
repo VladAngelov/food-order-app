@@ -10,7 +10,7 @@
         </div>
 
         <ul class="ul-st" *ngIf="salads.length > 0">
-            <h2>Салати</h2>
+            <h2 class="type-title">Салати</h2>
             <li *ngFor="let product of salads">
                 <img [src]="product.picture">
                 <div class="product-content">
@@ -30,7 +30,7 @@
             </li>
         </ul>
         <ul class="ul-st" *ngIf="soups.length > 0">
-            <h2>Супи</h2>
+            <h2 class="type-title">Супи</h2>
             <li *ngFor="let product of soups">
                 <img [src]="product.picture">
                 <div class="product-content">
@@ -49,7 +49,7 @@
             </li>
         </ul>
         <ul class="ul-st" *ngIf="mainDishes.length > 0">
-            <h2>Основни ястия</h2>
+            <h2 class="type-title">Основни ястия</h2>
             <li *ngFor="let product of mainDishes">
                 <img [src]="product.picture">
                 <div class="product-content">
@@ -68,7 +68,7 @@
             </li>
         </ul>
         <ul class="ul-st" *ngIf="desserts.length > 0">
-            <h2>Десерти</h2>
+            <h2 class="type-title">Десерти</h2>
             <li *ngFor="let product of desserts">
                 <img [src]="product.picture">
                 <div class="product-content">
@@ -87,7 +87,7 @@
             </li>
         </ul>
         <ul class="ul-st" *ngIf="drinks.length > 0">
-            <h2>Напитки</h2>
+            <h2 class="type-title">Напитки</h2>
             <li *ngFor="let product of drinks">
                 <img [src]="product.picture">
                 <div class="product-content">
