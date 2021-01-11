@@ -10,10 +10,10 @@ const LOG_IN_URL = AppConstants.LOG_IN;
 
 const routes: Routes = [
     {
-        path: `${USER}`,
+        path: USER,
         children: [
             {
-                path: `${LOG_IN_URL}`,
+                path: LOG_IN_URL,
                 component: LogInComponent,
                 data: {
                     isLoggedIn: false,
@@ -22,5 +22,4 @@ const routes: Routes = [
         ]
     }
 ];
-
 export const UserRoutingModule = RouterModule.forChild(routes);

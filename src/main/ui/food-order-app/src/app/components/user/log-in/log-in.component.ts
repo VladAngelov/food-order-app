@@ -19,7 +19,7 @@ export class LogInComponent {
   errorMessage = '';
   currentUser: any;
   googleURL = AppConstants.GOOGLE_AUTH_URL;
-  menu = AppConstants.PRODUCT_URL;
+  MENU = AppConstants.PRODUCT_URL;
 
   constructor(
     private authService: AuthService,
@@ -73,6 +73,6 @@ export class LogInComponent {
     this.isLoggedIn = true;
     this.currentUser = this.tokenStorage.getUser();
     window.location.reload();
-    this.router.navigate[`${this.menu}`];
+    this.router.navigate([this.MENU]);
   }
 }
