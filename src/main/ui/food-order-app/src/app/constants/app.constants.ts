@@ -1,7 +1,6 @@
 export class AppConstants {
 
     // --- COMMON --- //
-
     private static BASE_URL = "http://localhost:8080/";
     private static OAUTH2_URL = AppConstants.BASE_URL + "oauth2/authorization/";
     private static REDIRECT_URL = "?redirect_uri=http://localhost:8081/login";
@@ -17,7 +16,6 @@ export class AppConstants {
 
 
     // --- PRODUCT --- //
-
     public static PRODUCT_URL: string = 'menu';
     public static PRODUCT_ALL_URL: string = 'menu/all';
     public static PRODUCT_BY_ID: string = "menu/{id}";
@@ -35,23 +33,29 @@ export class AppConstants {
 
 
     // --- WORKER --- //
-
     public static WORKER_URL: string = 'worker';
     public static WORKER_LOG_IN_URL: string = 'worker/login';
 
-    // --- USER --- //
 
+    // --- USER --- //
     public static USER_URL: string = 'user';
     public static USER_ME_URL: string = 'user/me';
     public static USER_LOG_IN_URL: string = 'user/login';
+
 
     // --- LOGIN --- //
     public static LOG_IN: string = 'login';
     public static SIGN_IN: string = 'signin';
     public static SINGN_UP: string = 'signup';
 
-    // --- CONTACTS --- //
 
+    // --- CONTACTS --- //
     public static CONTACTS: string = 'contacts';
 
+
+    // --- ORDER --- //
+    public static ORDER_URL: string = 'order';
+    public static ORDER_ADD_URL: string = 'order/add';
+    public static ORDER_MAKE: string = 'order/make';
+    public static ORDER_EDIT: string = 'order/edit/{id}';
 }

@@ -10,20 +10,15 @@ import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
 import { ProductModule } from './modules/product/product.module';
 import { UserModule } from './modules/user/user.module';
-import { OrderAddComponent } from './components/order/order-add/order-add.component';
-import { OrderEditComponent } from './components/order/order-edit/order-edit.component';
 import { ContactsComponent } from './components/contacts/contacts/contacts.component';
-import { OrderListComponent } from './components/order/order-list/order-list.component';
+import { OrderModule } from './modules/order/order.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     NotFoundComponent,
     HomeComponent,
-    OrderAddComponent,
-    OrderEditComponent,
     ContactsComponent,
-    OrderListComponent,
     HeaderComponent,
     FooterComponent
   ],
@@ -32,7 +27,8 @@ import { OrderListComponent } from './components/order/order-list/order-list.com
     AppRoutingModule,
     HttpClientModule,
     ProductModule,
-    UserModule
+    UserModule,
+    OrderModule
   ],
   providers: [],
   bootstrap: [

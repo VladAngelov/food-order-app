@@ -1,1 +1,48 @@
-<p>order-add works!</p>
+<body>
+    <div *ngIf="products.length > 0" class="bill">
+        <h2>Сметка: {{ fee | currency:'BG':'symbol':'1.2-2' }} лв.</h2>
+        <div>
+            <ul>
+                <li *ngFor="let product of products">
+                    <div class="product-content">
+                        <h3>{{ product.name }}</h3>
+                        <p>{{ product.price | currency:'BG':'symbol':'1.2-2'}} лв.</p>
+                    </div>
+                    <button class="btn btn-cancel" (click)="remove(product)">Премахни</button>
+                </li>
+            </ul>
+        </div>
+        <!-- <div class="btn-order">
+            <button class="btn btn-add" (click)="onSubmit()">Поръчай</button>
+            <button class="btn btn-danger" (click)="onCancel()">Откажи</button>
+        </div> -->
+    </div>
+
+    <div *ngIf="products.length > 0" class="bill">
+        <h2>Въведете адрес за доставка: *</h2>
+        <div class="product-content">
+            <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+                <label for="address">Адрес <span class="red">*</span></label>
+                <input formControlName="address" type="text" name="address" id="address" required minlength="3"
+                    placeholder="улица, блок, №, етаж...">
+
+                <p class="error" *ngIf="form.get('address').touched && form.get('address').errors?.required">
+                    Адресът е задължителен!
+                </p>
+                <!-- <p class="error" *ngIf="form.get('name').touched && form.get('name').errors?.minlength">
+                Address must be at least 3 characters long.
+            </p>
+               -->
+            </form>
+        </div>
+        <div class="btn-order">
+            <button class="btn btn-add" (click)="onSubmit()">Поръчай</button>
+            <button class="btn btn-danger" (click)="onCancel()">Откажи</button>
+        </div>
+    </div>
+
+    <div *ngIf="products.length < 1" class="no-products">
+        <p>Няма избрани продукти.</p>
+    </div>
+</body>

@@ -5,9 +5,11 @@ import {
 import { Router } from '@angular/router';
 
 import { AppConstants } from 'src/app/constants/app.constants';
+import { IProduct } from 'src/app/interfaces/product';
 import { ImageModel } from 'src/app/models/Image';
 import { Product } from 'src/app/models/product';
 import { ImageService } from 'src/app/_services/image/image.service';
+import { OrderService } from 'src/app/_services/order/order.service';
 import { ProductService } from 'src/app/_services/product/product.service';
 import { TokenStorageService } from 'src/app/_services/token/token-storage.service';
 
@@ -17,8 +19,7 @@ import { TokenStorageService } from 'src/app/_services/token/token-storage.servi
   styleUrls: ['./product-list.component.css']
 })
 export class ProductListComponent implements OnInit {
-  photos: ImageModel[] = [];
-  photoUrl: string;
+
   base64Data: any;
   retrieveResonse: any;
 
@@ -28,21 +29,23 @@ export class ProductListComponent implements OnInit {
   mainDishes: Product[] = [];
   desserts: Product[] = [];
   drinks: Product[] = [];
+
   order: Product[] = [];
 
   private roles: string[];
   isLoggedIn = false;
   isAdmin = false;
 
-
   PRODUCT_IMAGE_DATA_FORMAT = AppConstants.PRODUCT_IMAGE_DATA_FORMAT;
   HOME = AppConstants.HOME_URL;
+  ADD_ORDER = AppConstants.ORDER_MAKE;
 
   constructor(
     private productService: ProductService,
     private tokenStorageService: TokenStorageService,
     private router: Router,
-    private imageService: ImageService
+    private imageService: ImageService,
+    private orderServcie: OrderService
   ) { }
 
   ngOnInit(): void {
@@ -77,7 +80,6 @@ export class ProductListComponent implements OnInit {
       this.isAdmin = this.roles.includes('ROLE_ADMIN');
     }
     this.redirecting();
-
   }
 
   sortProducts(prduct: Product): void {
@@ -102,18 +104,14 @@ export class ProductListComponent implements OnInit {
     }
   }
 
-  onAddToOrder(id) {
-    let product = new Product;
-    let p = this.products.find(x => x.id === id);
-
-    product.id = p.id;
-    product.name = p.name;
-    product.content = p.content;
-    product.volume = p.volume;
-    product.type = p.type;
-    product.price = p.price;
-
+  onAddToOrder(product: IProduct) {
     this.order.push(product);
+  }
+
+  checkout() {
+    console.log('In Checkout');
+    this.orderServcie.transfer(this.order);
+    this.router.navigateByUrl('/order');
   }
 
   redirecting() {
@@ -121,4 +119,5 @@ export class ProductListComponent implements OnInit {
       this.router.navigate[`${this.HOME}`];
     }
   }
+
 }

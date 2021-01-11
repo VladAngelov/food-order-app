@@ -12,7 +12,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(Links.API) // @RequestMapping("/api")
+@RequestMapping(Links.API)
 public class UserController {
 
     private final UserService userService;

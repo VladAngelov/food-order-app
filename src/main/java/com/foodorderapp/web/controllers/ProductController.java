@@ -61,7 +61,6 @@ public class ProductController {
         }
     }
 
-
     @GetMapping(path = Links.PRODUCT_BY_ID)
     public ResponseEntity<ProductViewModel> getProductById(
             @PathVariable("id") String id) {

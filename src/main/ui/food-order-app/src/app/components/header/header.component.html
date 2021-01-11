@@ -15,11 +15,6 @@
                 <li *ngIf="!isLoggedIn">
                     <a routerLink="/user/login">Вход</a>
                 </li>
-                <!-- <li>|</li>
-                <li>
-                    <a routerLink="/user/register">Регистрация</a>
-                </li> -->
-
                 <li *ngIf="isLoggedIn">
                     <a href="/" (click)="logout()">Изход</a>
                 </li>
@@ -69,7 +64,7 @@
                     <a routerLink="/menu/add">ДОБАВИ ПРОДУКТ</a>
                 </li>
                 <li *ngIf="isLoggedIn">
-                    <a routerLink="/order/add">КОШНИЦА</a>
+                    <a routerLink="/order">КОШНИЦА</a>
                 </li>
                 <li *ngIf="isAdmin && isLoggedIn">
                     <a routerLink="/order/all">ПОРЪЧКИ</a>

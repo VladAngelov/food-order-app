@@ -1,0 +1,51 @@
+body {
+    width: 80%;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+}
+
+p {
+    color: grey;
+}
+
+.no-products {
+    border-radius: 6px;
+    display: flex;
+    justify-content: center;
+    padding: 40px;
+    box-shadow: 0px 0px 18px -3px rgba(0, 0, 0, 0.75);
+    margin: 120px auto;
+}
+
+.bill {
+    border-radius: 6px;
+    padding: 20px;
+    box-shadow: 0px 0px 18px -3px rgba(0, 0, 0, 0.75);
+    margin: 30px auto;
+    width: 400px;
+}
+
+.bill h2 {
+    margin: 30px;
+    border-bottom: 1px solid grey;
+}
+
+.bill ul {
+    border-left: 1px dashed black;
+border-right: 1px dashed black;
+padding: 10px
+} 
+
+.bill ul li {
+    list-style: none;
+    display: flex;
+justify-content: space-between;
+margin: 10px auto;
+border-bottom: 1px dashed grey;
+}
+
+.btn-order {
+    display: flex;
+    justify-content: center;
+}

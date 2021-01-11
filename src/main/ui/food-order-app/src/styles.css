@@ -36,7 +36,6 @@ html {
   cursor:not-allowed;
 }
 
-
 .btn {
   width: 100px;
   padding: 10px;
@@ -44,6 +43,10 @@ html {
   border: none;
   text-align: center;
   margin: 5px 10px;
+}
+
+.btn:hover {
+  color: white;
 }
 
 .btn-add {
@@ -71,7 +74,25 @@ color: green;
 box-shadow: 0px 0px 30px 2px orange;
 }
 
-.btn-add:hover, 
-.btn-cancel:hover {
-  color: white;
+.btn-primary {
+  border: 1px solid blue;
+  background: white;
+  color: blue;
+  }
+  
+  .btn-primary:hover {
+    background: blue;
+    cursor: pointer;
+    box-shadow: 0px 0px 30px 2px blue;
+  }
+
+.btn-danger {
+  border: 1px solid red;
+  background: white;
+  color: red;  
+}
+.btn-danger:hover {
+  background: red;
+  cursor: pointer;
+  box-shadow: 0px 0px 30px 2px red;
 }
