@@ -2,20 +2,13 @@ package com.foodorderapp.models.entity;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Table(name = "orders")
 public class Order extends BaseEntity {
 
-   // @OneToMany(mappedBy="order")
-//    @OneToMany(cascade = CascadeType.ALL)
-//    @JoinColumn(name = "product_id", referencedColumnName = "product_id")
-//    private List<Product> products;
-
-    private Product product;
+    private List<Product> product;
     private String userData;
     private String date;
     private BigDecimal sum;
@@ -25,39 +18,18 @@ public class Order extends BaseEntity {
     public Order() {
     }
 
-    public Order(
-            String userData,
-            String date,
-            BigDecimal sum,
-            String address,
-            Boolean isActive,
-            Product product
-            //      List<Product> products
-    ) {
-    //    this.products = products;
-        this.userData = userData;
-        this.date = date;
-        this.sum = sum;
-        this.address = address;
-        this.isActive = isActive;
-        this.product = product;
-    }
+    @ManyToMany(targetEntity = Product.class)
+    @JoinTable(name = "orders_products",
+            joinColumns = { @JoinColumn(name = "order_id", referencedColumnName = "id") },
+            inverseJoinColumns = { @JoinColumn(name = "product_id", referencedColumnName = "id") }
+    )
 
-    @ManyToOne
-    public Product getProduct() {
+    public List<Product> getProduct() {
         return product;
     }
-    public void setProduct(Product product) {
+    public void setProduct(List<Product> product) {
         this.product = product;
     }
-
-
-    //    public List<Product> getProducts() {
-//        return products;
-//    }
-//    public void setProduct(List<Product> products) {
-//        this.products = products;
-//    }
 
     @Column(name = "userData", nullable = false)
     public String getUserData() {
