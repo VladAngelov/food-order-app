@@ -1,1 +1,51 @@
-<p>order-list works!</p>
+<body>
+    <section>
+        <div class="menu">
+            <h1>ПОРЪЧКИ</h1>
+        </div>
+        <div class="empty" *ngIf="orders.length <= 0">
+            <p>
+                Няма налични поръчки.
+            </p>
+        </div>
+
+        <ul class="ul-st" *ngIf="activeOrders.length > 0">
+            <h2 class="type-title">Активни поръчки</h2>
+            <li *ngFor="let order of activeOrders">
+                <div class="product-content">
+                    <ul *ngFor="let product of order.products">
+                        <li> {{ product.name }} </li>
+                        <li> {{ product.price | currency:'BG':'symbol':'1.2-2'}} лв.</li>
+                    </ul>
+                    <p>{{ order.date }}</p>
+                    <p>{{ order.sum | currency:'BG':'symbol':'1.2-2'}} лв.</p>
+                    <p>{{ order.address }}</p>
+                </div>
+                <div>
+                    <button *ngIf="isAdmin" [routerLink]="['/order/edit', order.id]"
+                        class="btn btn-cancel">Промени</button>
+                </div>
+            </li>
+        </ul>
+
+        <ul class="ul-st" *ngIf="activeOrders.length > 0">
+            <h2 class="type-title">Нективни поръчки</h2>
+            <li *ngFor="let order of deactiveOrders">
+                <div class="product-content">
+                    <ul *ngFor="let product of order.products">
+                        <li> {{ product.name }} </li>
+                        <li> {{ product.price | currency:'BG':'symbol':'1.2-2'}} лв.</li>
+                    </ul>
+                    <p>{{ order.date }}</p>
+                    <p>{{ order.sum | currency:'BG':'symbol':'1.2-2'}} лв.</p>
+                    <p>{{ order.address }}</p>
+                </div>
+                <div>
+                    <button *ngIf="isAdmin" [routerLink]="['/order/edit', order.id]"
+                        class="btn btn-cancel">Промени</button>
+                </div>
+            </li>
+        </ul>
+
+    </section>
+</body>

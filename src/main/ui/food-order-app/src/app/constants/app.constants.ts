@@ -20,7 +20,7 @@ export class AppConstants {
     public static PRODUCT_ALL_URL: string = 'menu/all';
     public static PRODUCT_BY_ID: string = "menu/{id}";
     public static PRODUCT_ADD_URL: string = 'menu/add';
-    public static PRODUCT_EDIT_BY_ID: string = "menu/edit/{id}";
+    public static PRODUCT_EDIT: string = "menu/edit/";
     public static PRODUCT_DELETE_BY_ID: string = 'menu/delete/{id}';
     public static PRODUCT_BY_TYPE: string = 'menu/{type}';
 
@@ -55,7 +55,9 @@ export class AppConstants {
 
     // --- ORDER --- //
     public static ORDER_URL: string = 'order';
+    public static ORDER_ALL_URL: string = 'order/all';
     public static ORDER_ADD_URL: string = 'order/add';
-    public static ORDER_MAKE: string = 'order/make';
-    public static ORDER_EDIT: string = 'order/edit/{id}';
+    public static ORDER_EDIT: string = 'order/edit';
+
+
 }

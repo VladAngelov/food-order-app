@@ -72,7 +72,7 @@ export class LogInComponent {
     this.isLoginFailed = false;
     this.isLoggedIn = true;
     this.currentUser = this.tokenStorage.getUser();
+    this.router.navigate([AppConstants.HOME_URL]);
     window.location.reload();
-    this.router.navigate([this.MENU]);
   }
 }

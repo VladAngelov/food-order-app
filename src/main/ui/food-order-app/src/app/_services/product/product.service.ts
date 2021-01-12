@@ -17,7 +17,9 @@ export class ProductService {
   }
 
   addProduct(product) {
-    return this.http.post(AppConstants.BASE_API_URL + AppConstants.PRODUCT_ADD_URL, product, httpOptions);
+    console.log('In product service -->>', product);
+    return this.http.post(AppConstants.BASE_API_URL + AppConstants.PRODUCT_ADD_URL, product, httpOptions)
+      .subscribe(x => console.log('Product service -->> ', x));
   }
 
   getById(id: string) {
@@ -25,7 +27,7 @@ export class ProductService {
   }
 
   editProduct(product) {
-    return this.http.put(AppConstants.BASE_API_URL + AppConstants.PRODUCT_EDIT_BY_ID, product, httpOptions);
+    return this.http.put(AppConstants.BASE_API_URL + AppConstants.PRODUCT_EDIT, product, httpOptions);
   }
 
   deleteProduct(id: string) {

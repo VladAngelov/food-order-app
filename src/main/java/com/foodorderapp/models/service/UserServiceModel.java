@@ -7,19 +7,19 @@ import javax.validation.constraints.Min;
 import java.util.Set;
 
 public class UserServiceModel {
+    private Long id;
     private String email;
     private String password;
     private Set<Role> roles;
 
     public UserServiceModel() {
     }
-    public UserServiceModel(
-            String email,
-            String password,
-            Set<Role> roles) {
-        this.email = email;
-        this.password = password;
-        this.roles = roles;
+
+    public Long getId() {
+        return id;
+    }
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getEmail() {

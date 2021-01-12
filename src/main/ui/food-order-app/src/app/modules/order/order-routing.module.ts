@@ -14,7 +14,7 @@ const ALL = AppConstants.ALL_URL;
 
 const routes: Routes = [
     {
-        path: `${ORDER}`,
+        path: ORDER,
         children: [
             {
                 path: '',
@@ -22,11 +22,11 @@ const routes: Routes = [
                 component: OrderAddComponent
             },
             {
-                path: `${EDIT}`,
+                path: EDIT,
                 component: OrderEditComponent
             },
             {
-                path: `${ALL}`,
+                path: ALL,
                 component: OrderListComponent
             }
         ]

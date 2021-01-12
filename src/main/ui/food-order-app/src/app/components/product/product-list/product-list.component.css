@@ -109,3 +109,7 @@ ul li h3{
     border-bottom: 1px solid gray;
     padding-bottom: 10px;
 }
+
+img {
+    border-radius: 6px;
+}

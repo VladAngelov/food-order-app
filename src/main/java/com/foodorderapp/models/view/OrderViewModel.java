@@ -12,20 +12,7 @@ public class OrderViewModel {
     private String address;
     private  Boolean isActive;
 
-    public OrderViewModel(
-            List<ProductServiceModel> products,
-            String userData,
-            String date,
-            BigDecimal sum,
-            String address,
-            Boolean isActive) {
-        this.products = products;
-        this.userData = userData;
-        this.date = date;
-        this.sum = sum;
-        this.address = address;
-        this.isActive = isActive;
-    }
+    public OrderViewModel() { }
 
     public List<ProductServiceModel> getProducts() {
         return products;

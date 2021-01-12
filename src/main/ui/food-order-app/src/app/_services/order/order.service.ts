@@ -3,6 +3,7 @@ import {
   HttpHeaders
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
 import { AppConstants } from 'src/app/constants/app.constants';
 import { IProduct } from 'src/app/interfaces/product';
@@ -14,8 +15,7 @@ const httpOptions = {
 
 @Injectable()
 export class OrderService {
-  BASE = AppConstants.BASE_API_URL;
-  ADD = AppConstants.ORDER_MAKE;
+
   products: Product[] = [];
 
   constructor(private http: HttpClient) { }
@@ -24,10 +24,24 @@ export class OrderService {
     this.products = productsInOrder;
   }
 
+  getAll(): Observable<any> {
+    return this.http.get(AppConstants.BASE_API_URL + AppConstants.ORDER_ALL_URL, httpOptions);
+  }
+
+  getById(id) {
+    return this.http.get(AppConstants.BASE_API_URL + AppConstants.EDIT_BY_ID + id, httpOptions);
+  }
+
   addOrder(order) {
-    this.http.post(this.BASE + this.ADD, order, httpOptions).subscribe(x => {
-      console.log('X -->> ', x);
-    });
+    return this.http.post(AppConstants.BASE_API_URL + AppConstants.ORDER_ADD_URL, order,
+      {
+        headers: httpOptions.headers,
+        observe: 'response'
+      });
+  }
+
+  editOrder(order) {
+    return this.http.put(AppConstants.BASE_API_URL + AppConstants.ORDER_EDIT, order, httpOptions);
   }
 
 }

@@ -9,109 +9,116 @@
             </p>
         </div>
 
-        <ul class="ul-st" *ngIf="salads.length > 0">
-            <h2 class="type-title">Салати</h2>
-            <li *ngFor="let product of salads">
-                <img [src]="product.picture">
-                <div class="product-content">
-                    <h3>{{ product.name }}</h3>
-                    <p>{{ product.content }}</p>
-                    <p>{{ product.price | currency:'BG':'symbol':'1.2-2'}} лв.</p>
-                    <p>{{ product.volume }} гр.</p>
-                </div>
-                <div>
-                    <button class="btn btn-add" (click)="onAddToOrder(product)">
-                        <i class="fas fa-cart-plus"></i>
-                    </button>
+        <div class="empty" *ngIf="isLoading">
+            <p>
+                Зареждане ...
+            </p>
+        </div>
+        <article *ngIf="!isLoading">
+            <ul class="ul-st" *ngIf="salads.length > 0">
+                <h2 class="type-title">Салати</h2>
+                <li *ngFor="let product of salads">
+                    <img [src]="product.picture">
+                    <div class="product-content">
+                        <h3>{{ product.name }}</h3>
+                        <p>{{ product.content }}</p>
+                        <p>{{ product.price | currency:'BG':'symbol':'1.2-2'}} лв.</p>
+                        <p>{{ product.volume }} гр.</p>
+                    </div>
+                    <div>
+                        <button class="btn btn-add" (click)="onAddToOrder(product)">
+                            <i class="fas fa-cart-plus"></i>
+                        </button>
 
-                    <button *ngIf="isAdmin" [routerLink]="['/menu/edit', product.id]"
-                        class="btn btn-cancel">Промени</button>
-                </div>
-            </li>
-        </ul>
-        <ul class="ul-st" *ngIf="soups.length > 0">
-            <h2 class="type-title">Супи</h2>
-            <li *ngFor="let product of soups">
-                <img [src]="product.picture">
-                <div class="product-content">
-                    <h3>{{ product.name }}</h3>
-                    <p>{{ product.content }}</p>
-                    <p>{{ product.price }} лв.</p>
-                    <p>{{ product.volume }} гр.</p>
-                </div>
-                <div>
-                    <button class="btn btn-add" (click)="onAddToOrder(product)">
-                        <i class="fas fa-cart-plus"></i>
-                    </button>
-                    <button *ngIf="isAdmin" [routerLink]="['/menu/edit', product.id]"
-                        class="btn btn-cancel">Промени</button>
-                </div>
-            </li>
-        </ul>
-        <ul class="ul-st" *ngIf="mainDishes.length > 0">
-            <h2 class="type-title">Основни ястия</h2>
-            <li *ngFor="let product of mainDishes">
-                <img [src]="product.picture">
-                <div class="product-content">
-                    <h3>{{ product.name }}</h3>
-                    <p>{{ product.content }}</p>
-                    <p>{{ product.price }} лв.</p>
-                    <p>{{ product.volume }} гр.</p>
-                </div>
-                <div>
-                    <button class="btn btn-add" (click)="onAddToOrder(product)">
-                        <i class="fas fa-cart-plus"></i>
-                    </button>
-                    <button *ngIf="isAdmin" [routerLink]="['/menu/edit', product.id]"
-                        class="btn btn-cancel">Промени</button>
-                </div>
-            </li>
-        </ul>
-        <ul class="ul-st" *ngIf="desserts.length > 0">
-            <h2 class="type-title">Десерти</h2>
-            <li *ngFor="let product of desserts">
-                <img [src]="product.picture">
-                <div class="product-content">
-                    <h3>{{ product.name }}</h3>
-                    <p>{{ product.content }}</p>
-                    <p>{{ product.price }} лв.</p>
-                    <p>{{ product.volume }} гр.</p>
-                </div>
-                <div>
-                    <button class="btn btn-add" (click)="onAddToOrder(product)">
-                        <i class="fas fa-cart-plus"></i>
-                    </button>
-                    <button *ngIf="isAdmin" [routerLink]="['/menu/edit', product.id]"
-                        class="btn btn-cancel">Промени</button>
-                </div>
-            </li>
-        </ul>
-        <ul class="ul-st" *ngIf="drinks.length > 0">
-            <h2 class="type-title">Напитки</h2>
-            <li *ngFor="let product of drinks">
-                <img [src]="product.picture">
-                <div class="product-content">
-                    <h3>{{ product.name }}</h3>
-                    <p>{{ product.content }}</p>
-                    <p>{{ product.price }} лв.</p>
-                    <p>{{ product.volume }} мл.</p>
-                </div>
-                <div>
-                    <button class="btn btn-add" (click)="onAddToOrder(product)">
-                        <i class="fas fa-cart-plus"></i>
-                    </button>
-                    <button *ngIf="isAdmin" [routerLink]="['/menu/edit', product.id]"
-                        class="btn btn-cancel">Промени</button>
-                </div>
-            </li>
-        </ul>
+                        <button *ngIf="isAdmin" [routerLink]="['/menu/edit', product.id]"
+                            class="btn btn-cancel">Промени</button>
+                    </div>
+                </li>
+            </ul>
+            <ul class="ul-st" *ngIf="soups.length > 0">
+                <h2 class="type-title">Супи</h2>
+                <li *ngFor="let product of soups">
+                    <img [src]="product.picture">
+                    <div class="product-content">
+                        <h3>{{ product.name }}</h3>
+                        <p>{{ product.content }}</p>
+                        <p>{{ product.price | currency:'BG':'symbol':'1.2-2'}}</p>
+                        <p>{{ product.volume }} гр.</p>
+                    </div>
+                    <div>
+                        <button class="btn btn-add" (click)="onAddToOrder(product)">
+                            <i class="fas fa-cart-plus"></i>
+                        </button>
+                        <button *ngIf="isAdmin" [routerLink]="['/menu/edit', product.id]"
+                            class="btn btn-cancel">Промени</button>
+                    </div>
+                </li>
+            </ul>
+            <ul class="ul-st" *ngIf="mainDishes.length > 0">
+                <h2 class="type-title">Основни ястия</h2>
+                <li *ngFor="let product of mainDishes">
+                    <img [src]="product.picture">
+                    <div class="product-content">
+                        <h3>{{ product.name }}</h3>
+                        <p>{{ product.content }}</p>
+                        <p>{{ product.price | currency:'BG':'symbol':'1.2-2'}}</p>
+                        <p>{{ product.volume }} гр.</p>
+                    </div>
+                    <div>
+                        <button class="btn btn-add" (click)="onAddToOrder(product)">
+                            <i class="fas fa-cart-plus"></i>
+                        </button>
+                        <button *ngIf="isAdmin" [routerLink]="['/menu/edit', product.id]"
+                            class="btn btn-cancel">Промени</button>
+                    </div>
+                </li>
+            </ul>
+            <ul class="ul-st" *ngIf="desserts.length > 0">
+                <h2 class="type-title">Десерти</h2>
+                <li *ngFor="let product of desserts">
+                    <img [src]="product.picture">
+                    <div class="product-content">
+                        <h3>{{ product.name }}</h3>
+                        <p>{{ product.content }}</p>
+                        <p>{{ product.price | currency:'BG':'symbol':'1.2-2'}}</p>
+                        <p>{{ product.volume }} гр.</p>
+                    </div>
+                    <div>
+                        <button class="btn btn-add" (click)="onAddToOrder(product)">
+                            <i class="fas fa-cart-plus"></i>
+                        </button>
+                        <button *ngIf="isAdmin" [routerLink]="['/menu/edit', product.id]"
+                            class="btn btn-cancel">Промени</button>
+                    </div>
+                </li>
+            </ul>
+            <ul class="ul-st" *ngIf="drinks.length > 0">
+                <h2 class="type-title">Напитки</h2>
+                <li *ngFor="let product of drinks">
+                    <img [src]="product.picture">
+                    <div class="product-content">
+                        <h3>{{ product.name }}</h3>
+                        <p>{{ product.content }}</p>
+                        <p>{{ product.price | currency:'BG':'symbol':'1.2-2'}}</p>
+                        <p>{{ product.volume }} мл.</p>
+                    </div>
+                    <div>
+                        <button class="btn btn-add" (click)="onAddToOrder(product)">
+                            <i class="fas fa-cart-plus"></i>
+                        </button>
+                        <button *ngIf="isAdmin" [routerLink]="['/menu/edit', product.id]"
+                            class="btn btn-cancel">Промени</button>
+                    </div>
+                </li>
+            </ul>
+        </article>
     </section>
     <aside>
         <div class="aside">
             <ul *ngIf="order">
-                <li *ngFor="let prduct of order">
-                    <h4>{{ prduct.name }}</h4>
-                    <p>{{ prduct.price | currency:'BG':'symbol':'1.2-2'}}</p>
+                <li *ngFor="let product of order">
+                    <h4>{{ product.name }}</h4>
+                    <p>{{ product.price | currency:'BG':'symbol':'1.2-2'}}</p>
                 </li>
             </ul>
 

@@ -1,36 +1,31 @@
 package com.foodorderapp.models.service;
 
-import com.foodorderapp.models.entity.Product;
 import java.math.BigDecimal;
+import java.util.List;
 
 public class OrderServiceModel {
-    private Product product;
+    private String id;
+    private List<ProductServiceModel> products;
     private String userData;
     private String date;
     private BigDecimal sum;
     private String address;
     private Boolean isActive;
 
-    public OrderServiceModel(
-            Product product,
-            String userData,
-            String date,
-            BigDecimal sum,
-            String address,
-            Boolean isActive) {
-        this.product = product;
-        this.userData = userData;
-        this.date = date;
-        this.sum = sum;
-        this.address = address;
-        this.isActive = isActive;
+    public OrderServiceModel() { }
+
+    public String getId() {
+        return id;
+    }
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public Product getProduct() {
-        return product;
+    public List<ProductServiceModel> getProducts() {
+        return products;
     }
-    public void setProduct(Product product) {
-        this.product = product;
+    public void setProducts(List<ProductServiceModel> products) {
+        this.products = products;
     }
 
     public String getUserData() {

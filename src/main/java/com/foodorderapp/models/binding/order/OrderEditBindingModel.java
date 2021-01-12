@@ -2,23 +2,30 @@ package com.foodorderapp.models.binding.order;
 
 import com.foodorderapp.models.service.ProductServiceModel;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
-import java.util.Set;
+import java.util.List;
 
 public class OrderEditBindingModel {
-    private Set<ProductServiceModel> products;
+    private String id;
+    private List<ProductServiceModel> products;
     private String userData;
-    private LocalDateTime date;
+    private String date;
     private BigDecimal sum;
     private String address;
     private Boolean isActive;
 
     public OrderEditBindingModel() { }
 
-    public Set<ProductServiceModel> getProducts() {
+    public String getId() {
+        return id;
+    }
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public List<ProductServiceModel> getProducts() {
         return products;
     }
-    public void setProducts(Set<ProductServiceModel> products) {
+    public void setProducts(List<ProductServiceModel> products) {
         this.products = products;
     }
 
@@ -29,11 +36,11 @@ public class OrderEditBindingModel {
         this.userData = userData;
     }
 
-    public LocalDateTime getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(LocalDateTime date) {
+    public void setDate(String date) {
         this.date = date;
     }
 

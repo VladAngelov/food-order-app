@@ -103,3 +103,7 @@ p.error {
   padding-top: 0;
   margin-bottom: 20px;
 }
+
+img {
+  box-shadow: 0px 0px 14px 12px #EDEFF0
+}

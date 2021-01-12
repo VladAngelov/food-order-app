@@ -24,17 +24,22 @@
                 <p class="error" *ngIf="form.get('address').touched && form.get('address').errors?.required">
                     Адресът е задължителен!
                 </p>
-                <!-- <p class="error" *ngIf="form.get('name').touched && form.get('name').errors?.minlength">
-                Address must be at least 3 characters long.
-            </p>
-               -->
+
+
                 <div class="btn-order">
-                    <button class="btn btn-add" [disabled]="isLoading || form.invalid"
+                    <p class="error" *ngIf="fee <= 5">
+                        Поръчката, трябва да е повече от 5 лв.!
+                    </p>
+                    <button class="btn btn-add" [disabled]="isLoading || form.invalid || fee <= 5"
                         (click)="onSubmit()">Поръчай</button>
                     <button class="btn btn-danger" (click)="onCancel()">Откажи</button>
                 </div>
             </form>
         </div>
+    </div>
+
+    <div *ngIf="message" class="no-products">
+        <p>{{ message }}</p>
     </div>
 
     <div *ngIf="products.length < 1" class="no-products">

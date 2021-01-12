@@ -1,7 +1,9 @@
 package com.foodorderapp.services.impl;
 
 
+import com.foodorderapp.exceptions.OAuth2AuthenticationProcessingException;
 import com.foodorderapp.exceptions.UserAlreadyExistAuthenticationException;
+import com.foodorderapp.models.binding.auth.SocialProvider;
 import com.foodorderapp.models.binding.user.LocalUserBindingModel;
 import com.foodorderapp.models.binding.auth.SignUpRequestBindingModel;
 import com.foodorderapp.models.entity.Role;
@@ -9,13 +11,17 @@ import com.foodorderapp.models.entity.User;
 import com.foodorderapp.models.service.UserServiceModel;
 import com.foodorderapp.repositories.RoleRepository;
 import com.foodorderapp.repositories.UserRepository;
+import com.foodorderapp.security.oauth2.user.OAuth2UserInfo;
+import com.foodorderapp.security.oauth2.user.OAuth2UserInfoFactory;
 import com.foodorderapp.services.interfaces.UserService;
+import com.foodorderapp.util.GeneralUtils;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.core.oidc.OidcIdToken;
 import org.springframework.security.oauth2.core.oidc.OidcUserInfo;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 import javax.annotation.PostConstruct;
 import java.util.*;
@@ -60,27 +66,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserServiceModel findUserByEmail(String email) {
-        return this.modelMapper
-                    .map(userRepository.findByEmail(email),
-                            UserServiceModel.class);
-    }
-
-    @Override
-    public Optional<UserServiceModel> findUserById(Long id) {
-        UserServiceModel user = this.modelMapper
-                .map(this.userRepository.findById(id),
-                        UserServiceModel.class);
-
-        return Optional.of(user);
-    }
-
-    @Override
-    public LocalUserBindingModel processUserRegistration(
-            String registrationId,
-            Map<String, Object> attributes,
-            OidcIdToken idToken,
-            OidcUserInfo userInfo) {
-        return null;
+         User user = userRepository.findByEmail(email);
+         return this.modelMapper.map(user, UserServiceModel.class);
     }
 
     private User buildUser(final SignUpRequestBindingModel formDTO) {
@@ -95,6 +82,60 @@ public class UserServiceImpl implements UserService {
         user.setEnabled(true);
         user.setProviderUserId(formDTO.getProviderUserId());
         return user;
+    }
+
+    @Override
+    @Transactional
+    public LocalUserBindingModel processUserRegistration(
+            String registrationId,
+            Map<String, Object> attributes,
+            OidcIdToken idToken,
+            OidcUserInfo userInfo) {
+        OAuth2UserInfo oAuth2UserInfo = OAuth2UserInfoFactory.getOAuth2UserInfo(registrationId, attributes);
+        if (StringUtils.isEmpty(oAuth2UserInfo.getName())) {
+            throw new OAuth2AuthenticationProcessingException("Name not found from OAuth2 provider");
+        } else if (StringUtils.isEmpty(oAuth2UserInfo.getEmail())) {
+            throw new OAuth2AuthenticationProcessingException("Email not found from OAuth2 provider");
+        }
+        SignUpRequestBindingModel userDetails =
+                toUserRegistrationObject(registrationId, oAuth2UserInfo);
+        User user = this.userRepository.findByEmail(oAuth2UserInfo.getEmail());
+        if (user != null) {
+            if (!user.getProvider().equals(registrationId) && !user.getProvider().equals(SocialProvider.LOCAL.getProviderType())) {
+                throw new OAuth2AuthenticationProcessingException(
+                        "Looks like you're signed up with " + user.getProvider() + " account. Please use your " + user.getProvider() + " account to login.");
+            }
+            user = updateExistingUser(user, oAuth2UserInfo);
+        } else {
+            var userSM = registerNewUser(userDetails);
+            user = this.modelMapper.map(userSM, User.class);
+        }
+
+        return LocalUserBindingModel.create(user, attributes, idToken, userInfo);
+    }
+
+    private User updateExistingUser(User existingUser, OAuth2UserInfo oAuth2UserInfo) {
+        existingUser.setDisplayName(oAuth2UserInfo.getName());
+        return userRepository.save(existingUser);
+    }
+
+    private SignUpRequestBindingModel toUserRegistrationObject(String registrationId, OAuth2UserInfo oAuth2UserInfo) {
+        return SignUpRequestBindingModel
+                .getBuilder()
+                .addProviderUserID(oAuth2UserInfo.getId())
+                .addDisplayName(oAuth2UserInfo.getName())
+                .addEmail(oAuth2UserInfo.getEmail())
+                .addSocialProvider(GeneralUtils.toSocialProvider(registrationId))
+                .addPassword("changeit")
+                .build();
+    }
+
+    @Override
+    public Optional<UserServiceModel> findUserById(Long id) {
+
+       Optional<User> user = userRepository.findById(id);
+       var userSM = this.modelMapper.map(user, UserServiceModel.class);
+       return Optional.of(userSM);
     }
 
     @PostConstruct

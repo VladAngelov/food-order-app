@@ -1,0 +1,111 @@
+body {
+    display: flex;
+}
+
+h1 {
+    font-size: 30px;
+}
+
+section {
+    width: 60%;
+    margin: auto;
+}
+
+aside {
+    width: 30%;
+    margin-top: 150px;
+    margin-bottom: 25px;
+    border-left: 1px solid gray;
+    padding-left: 10px;
+
+}
+
+.aside {
+    position: sticky;
+    top: 20px;
+}
+
+aside ul {
+    border: none;
+}
+
+aside ul li {
+    list-style: none;
+    margin-left: 40px;
+    margin-bottom: 15px;
+}
+
+img {
+    width: 150px;
+}
+
+i {
+    font-size: 20px;
+}
+
+ul {
+    border-bottom: 1px solid grey;
+}
+h3, p {
+    color: grey;
+}
+
+.type-title {
+    align-self: start;
+    border-bottom: 1px solid grey;
+}
+
+
+ul li h3{
+    margin: 30px auto 15px auto;
+    border-bottom: 1px solid grey;
+}
+
+.ul-st {
+    display: flex;
+    flex-direction: column;
+    margin: 30px auto;
+    align-items: center;
+}
+
+.ul-st li {
+    display: flex;
+    margin: 15px 0;
+    align-self: start;
+    align-items: center;
+}
+
+.product-content {
+ display: flex;
+ flex-direction: column;
+ margin-left: 4rem;
+ min-width: 400px;
+}
+ 
+.btn {
+    margin: 5px 4rem;
+  }
+ 
+.inner-li {
+      margin: 0 20px;
+  }
+
+.empty {
+    border-radius: 6px;
+    display: flex;
+    justify-content: center;
+    padding: 40px;
+    box-shadow: 0px 0px 18px -3px rgba(0, 0, 0, 0.75);
+    margin: 120px auto;
+}
+
+.menu {
+    display: flex;
+    justify-content: center;
+    margin: 50px auto 0 auto;
+}
+
+.menu h1 {
+    border-bottom: 1px solid gray;
+    padding-bottom: 10px;
+}

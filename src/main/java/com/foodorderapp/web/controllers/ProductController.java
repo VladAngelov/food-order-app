@@ -48,6 +48,7 @@ public class ProductController {
                     ProductViewModel productViewModel =
                             this.modelMapper
                             .map(product, ProductViewModel.class);
+
                     products.add(productViewModel);
                 }
 
@@ -61,22 +62,22 @@ public class ProductController {
         }
     }
 
-    @GetMapping(path = Links.PRODUCT_BY_ID)
-    public ResponseEntity<ProductViewModel> getProductById(
-            @PathVariable("id") String id) {
-        ProductServiceModel productServiceModel = this.modelMapper
-                .map(this.productService.findById(id), ProductServiceModel.class);
-
-        ProductViewModel product = this.modelMapper
-                .map(productServiceModel, ProductViewModel.class);
-
-        if (product.getName() != null) {
-            Optional<ProductViewModel> productOp = Optional.of(product);
-            return new ResponseEntity<>(productOp.get(), HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-    }
+//    @GetMapping(path = Links.PRODUCT_BY_ID)
+//    public ResponseEntity<ProductViewModel> getProductById(
+//            @PathVariable("id") String id) {
+//        ProductServiceModel productServiceModel = this.modelMapper
+//                .map(this.productService.findById(id), ProductServiceModel.class);
+//
+//        ProductViewModel product = this.modelMapper
+//                .map(productServiceModel, ProductViewModel.class);
+//
+//        if (product.getName() != null) {
+//            Optional<ProductViewModel> productOp = Optional.of(product);
+//            return new ResponseEntity<>(productOp.get(), HttpStatus.OK);
+//        } else {
+//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//        }
+//    }
 
     @PostMapping(path = Links.PRODUCT_ADD)
     public ResponseEntity<?> addProduct(
@@ -98,29 +99,40 @@ public class ProductController {
         }
     }
 
-    @PutMapping(path = Links.PRODUCT_EDIT_BY_ID)
+    @GetMapping(path = Links.PRODUCT_GET_BY_ID)
+    public ResponseEntity<ProductViewModel> getProduct(@PathVariable("id") String id) {
+
+        try {
+            var product = this.modelMapper
+                    .map(this.productService.findById(id),
+                            ProductViewModel.class);
+
+            return  new ResponseEntity<>(product, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+    @PutMapping(path = Links.PRODUCT_EDIT)
     public ResponseEntity<ProductViewModel> editProduct(
-            @PathVariable("id") String id,
             @RequestBody ProductEditBindingModel productEditBindingModel) {
         try {
             ProductEditBindingModel productData = this.modelMapper
-                            .map(this.productService.findById(id),
+                            .map(this.productService.findById(productEditBindingModel.getId()),
                                     ProductEditBindingModel.class);
 
-            Optional<ProductEditBindingModel> productOptional =
-                    Optional.ofNullable(productData);
+//            Optional<ProductEditBindingModel> productOptional =
+//                    Optional.ofNullable(productData);
 
-            if (productOptional.isPresent()) {
-                ProductEditBindingModel product = productOptional.get();
-                product.setName(productEditBindingModel.getName());
-                product.setContent(productEditBindingModel.getContent());
-                product.setType(productEditBindingModel.getType());
-                product.setVolume(productEditBindingModel.getVolume());
-                product.setPrice(productEditBindingModel.getPrice());
+            if (productData != null) {
+                productData.setName(productEditBindingModel.getName());
+                productData.setContent(productEditBindingModel.getContent());
+                productData.setType(productEditBindingModel.getType());
+                productData.setVolume(productEditBindingModel.getVolume());
+                productData.setPrice(productEditBindingModel.getPrice());
                // product.setPicBytes(compressBytes(file.getBytes()));
 
                 ProductServiceModel productServiceModel = this.modelMapper
-                        .map(product, ProductServiceModel.class);
+                        .map(productData, ProductServiceModel.class);
 
                 return new ResponseEntity<>(
                         this.modelMapper.map(

@@ -6,13 +6,12 @@ import com.foodorderapp.models.service.ProductServiceModel;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 import java.util.List;
 
 public class OrderAddBindingModel {
     private List<ProductServiceModel> products;
     private String userData;
-    private LocalDateTime date;
+    private String date;
     private BigDecimal sum;
     private String address;
     private Boolean isActive;
@@ -36,10 +35,10 @@ public class OrderAddBindingModel {
     }
 
     @NotNull
-    public LocalDateTime getDate() {
+    public String getDate() {
         return date;
     }
-    public void setDate(LocalDateTime date) {
+    public void setDate(String date) {
         this.date = date;
     }
 

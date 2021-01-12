@@ -35,10 +35,7 @@ export class ProductListComponent implements OnInit {
   private roles: string[];
   isLoggedIn = false;
   isAdmin = false;
-
-  PRODUCT_IMAGE_DATA_FORMAT = AppConstants.PRODUCT_IMAGE_DATA_FORMAT;
-  HOME = AppConstants.HOME_URL;
-  ADD_ORDER = AppConstants.ORDER_MAKE;
+  isLoading = false;
 
   constructor(
     private productService: ProductService,
@@ -49,6 +46,7 @@ export class ProductListComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.isLoading = true;
     this.productService.getAll()
       .subscribe(products => {
         for (var p of products) {
@@ -79,6 +77,7 @@ export class ProductListComponent implements OnInit {
       this.roles = user.roles;
       this.isAdmin = this.roles.includes('ROLE_ADMIN');
     }
+    this.isLoading = false;
     this.redirecting();
   }
 
@@ -111,12 +110,12 @@ export class ProductListComponent implements OnInit {
   checkout() {
     console.log('In Checkout');
     this.orderServcie.transfer(this.order);
-    this.router.navigateByUrl('/order');
+    this.router.navigate([AppConstants.ORDER_URL]);
   }
 
   redirecting() {
     if (!this.isLoggedIn) {
-      this.router.navigate[`${this.HOME}`];
+      this.router.navigate([AppConstants.HOME_URL]);
     }
   }
 

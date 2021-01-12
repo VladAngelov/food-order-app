@@ -8,6 +8,7 @@ import {
   Validators
 } from '@angular/forms';
 import { Router } from '@angular/router';
+import { nextTick } from 'process';
 import { AppConstants } from 'src/app/constants/app.constants';
 
 import { IProduct } from 'src/app/interfaces/product';
@@ -29,6 +30,8 @@ export class OrderAddComponent implements OnInit {
   roles = [];
   isAdmin = false;
   userData = '';
+
+  message = '';
 
   form = new FormGroup({
     address: new FormControl('', [Validators.required, Validators.minLength(3)])
@@ -79,7 +82,12 @@ export class OrderAddComponent implements OnInit {
     order.sum = this.fee;
     order.userData = this.userData;
 
-    this.orderService.addOrder(order);
+    this.orderService.addOrder(order).subscribe(response => {
+    }, err => {
+      this.message = err.message;
+    }, () => {
+      this.router.navigate(['/'])
+    });
   }
 
   onCancel() {
