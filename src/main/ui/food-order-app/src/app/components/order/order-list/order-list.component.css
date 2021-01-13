@@ -80,6 +80,11 @@ ul li h3{
  flex-direction: column;
  margin-left: 4rem;
  min-width: 400px;
+ border-bottom: 1px solid grey;
+}
+
+.product-content p {
+    margin-top: 10px;
 }
  
 .btn {
@@ -109,3 +114,11 @@ ul li h3{
     border-bottom: 1px solid gray;
     padding-bottom: 10px;
 }
+
+.inner-list {
+    border: none;
+}
+
+.inner-list p {
+    margin-right: 5px;
+ }

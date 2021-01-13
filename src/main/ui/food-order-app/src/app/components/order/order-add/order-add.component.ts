@@ -52,12 +52,10 @@ export class OrderAddComponent implements OnInit {
       const user = this.tokenStorageService.getUser();
       this.roles = user.roles;
       this.isAdmin = this.roles.includes('ROLE_ADMIN');
-      this.userData = JSON.stringify(user);
+      this.userData = user.displayName + ', ' + user.email;
     }
     this.products = this.orderService.products;
     this.calcFee();
-
-    console.log('On init ->', this.products);
   }
 
   calcFee() {
@@ -77,7 +75,7 @@ export class OrderAddComponent implements OnInit {
     let order = new Order();
     order.address = this.form.controls['address'].value;
     order.date = new Date().toLocaleDateString();
-    order.isActive = true;
+    order.active = true;
     order.products = this.products;
     order.sum = this.fee;
     order.userData = this.userData;
@@ -86,7 +84,8 @@ export class OrderAddComponent implements OnInit {
     }, err => {
       this.message = err.message;
     }, () => {
-      this.router.navigate(['/'])
+      this.orderService.products = [];
+      this.router.navigate([AppConstants.HOME_URL]);
     });
   }
 
@@ -95,6 +94,7 @@ export class OrderAddComponent implements OnInit {
       let index = this.products.indexOf(p);
       this.products.splice(index, 1);
     }
+    this.orderService.products = [];
     this.router.navigate([AppConstants.HOME_URL]);
   }
 

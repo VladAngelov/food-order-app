@@ -13,12 +13,18 @@
             <h2 class="type-title">Активни поръчки</h2>
             <li *ngFor="let order of activeOrders">
                 <div class="product-content">
-                    <ul *ngFor="let product of order.products">
-                        <li> {{ product.name }} </li>
-                        <li> {{ product.price | currency:'BG':'symbol':'1.2-2'}} лв.</li>
-                    </ul>
                     <p>{{ order.date }}</p>
+                    <p *ngIf="order.active">Активна</p>
+
+                    <ul class="inner-list">
+                        <li *ngFor="let product of order.products">
+                            <p>{{ product.name }} </p>
+                            <p> {{ product.price | currency:'BG':'symbol':'1.2-2'}} лв. </p>
+                        </li>
+                    </ul>
+
                     <p>{{ order.sum | currency:'BG':'symbol':'1.2-2'}} лв.</p>
+                    <p>{{ order.userData }}</p>
                     <p>{{ order.address }}</p>
                 </div>
                 <div>
@@ -28,16 +34,14 @@
             </li>
         </ul>
 
-        <ul class="ul-st" *ngIf="activeOrders.length > 0">
+        <ul class="ul-st" *ngIf="deactiveOrders.length > 0">
             <h2 class="type-title">Нективни поръчки</h2>
             <li *ngFor="let order of deactiveOrders">
                 <div class="product-content">
-                    <ul *ngFor="let product of order.products">
-                        <li> {{ product.name }} </li>
-                        <li> {{ product.price | currency:'BG':'symbol':'1.2-2'}} лв.</li>
-                    </ul>
                     <p>{{ order.date }}</p>
+                    <p *ngIf="!order.active">Неактивна</p>
                     <p>{{ order.sum | currency:'BG':'symbol':'1.2-2'}} лв.</p>
+                    <p>{{ order.userData }}</p>
                     <p>{{ order.address }}</p>
                 </div>
                 <div>

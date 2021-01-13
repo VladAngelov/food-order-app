@@ -79,6 +79,7 @@ export class ProductListComponent implements OnInit {
     }
     this.isLoading = false;
     this.redirecting();
+    this.checkProducts();
   }
 
   sortProducts(prduct: Product): void {
@@ -108,10 +109,14 @@ export class ProductListComponent implements OnInit {
   }
 
   checkout() {
-    console.log('In Checkout');
     this.orderServcie.transfer(this.order);
     this.router.navigate([AppConstants.ORDER_URL]);
   }
+
+  checkProducts() {
+    this.order = this.orderServcie.products
+  }
+
 
   redirecting() {
     if (!this.isLoggedIn) {

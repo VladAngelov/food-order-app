@@ -12,7 +12,7 @@ export class AppConstants {
     public static HOME_URL: string = 'home';
     public static ALL_URL: string = 'all';
     public static ADD_URL: string = 'add';
-    public static EDIT_BY_ID: string = 'edit/{id}';
+    public static EDIT_BY_ID: string = 'edit/:id';
 
 
     // --- PRODUCT --- //

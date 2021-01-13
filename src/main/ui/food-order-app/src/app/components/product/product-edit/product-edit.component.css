@@ -1,0 +1,79 @@
+.new-food-border {
+    border: 1px solid;
+    border-radius: 1em;
+    width: 80%;
+    margin: auto;
+    margin-top: 2em;
+    padding: 1em;
+    margin-bottom: 30px;
+  }
+  
+  .new-food-border .input {
+    margin-bottom: 1em;
+  }
+  
+  .header-background {
+    background-color: #4ebced;
+    border: 1px solid #4ebced;
+    padding: 1.5em;
+    padding-bottom: 0;
+    margin-bottom: 1em;
+    border-top-right-radius: 1em;
+    border-top-left-radius: 1em;
+  }
+  
+  .header-background span {
+    background-color: #fff;
+    padding: 0.5em;
+    margin-top: 1em;
+    border-radius: 0.3em;
+  }
+  
+  .title, .new-food-content {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .new-food-content {
+    min-height: 100%;
+    width: 100%;
+    padding: 0;
+    margin: 10px auto;
+  }
+  
+  .new-food-content textarea {
+    width: 100%;
+    padding: 0.5em;
+    margin: 0;
+  }
+  
+  .new-food-content label {
+    margin-bottom: 0.3em;
+  }
+  
+  .new-food-title input {
+    width: 100%;
+    border-radius: 0.3em;
+    padding: 0.35em;
+    margin: 10px auto;
+  }
+
+  p.error {
+    text-align: left;
+    border-radius: 0.3em;
+    color: red;
+    padding-top: 0;
+  }
+  
+  .input-error {
+    border-left-color: red;
+  }
+
+  .new-food-buttons{
+    display: flex;
+    justify-content: center;
+  }
+
+textarea, select {
+border-radius: 4px;
+}

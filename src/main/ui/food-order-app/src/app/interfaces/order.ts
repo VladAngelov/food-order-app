@@ -7,5 +7,5 @@ export interface IOrder extends IBase {
     date: String;
     sum: number;
     address: String;
-    isActive: boolean;
+    active: boolean;
 }

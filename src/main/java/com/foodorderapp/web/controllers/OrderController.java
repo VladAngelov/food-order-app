@@ -4,7 +4,6 @@ import com.foodorderapp.constants.Links;
 import com.foodorderapp.models.binding.order.OrderAddBindingModel;
 import com.foodorderapp.models.binding.order.OrderEditBindingModel;
 import com.foodorderapp.models.service.OrderServiceModel;
-import com.foodorderapp.models.service.ProductServiceModel;
 import com.foodorderapp.models.view.OrderViewModel;
 import com.foodorderapp.services.interfaces.OrderService;
 

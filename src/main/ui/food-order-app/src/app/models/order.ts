@@ -7,7 +7,7 @@ export class Order implements IOrder {
     date: String;
     sum: number;
     address: String;
-    isActive: boolean;
+    active: boolean;
     id: string;
 
     constructor() { }

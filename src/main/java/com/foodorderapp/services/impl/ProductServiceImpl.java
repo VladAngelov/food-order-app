@@ -34,14 +34,6 @@ public class ProductServiceImpl implements ProductService {
        return this.modelMapper
                .map(this.productRepository.findByName(name),
                     ProductServiceModel.class);
-
-//        return this.modelMapper
-//                .map(
-//                    this.productRepository
-//                            .findAll()
-//                            .stream()
-//                            .filter(p -> p.getName().equals(name)),
-//                    ProductServiceModel.class);
     }
 
     @Override
@@ -65,25 +57,22 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Optional<ProductServiceModel> findById(String id) {
-        ProductServiceModel product = this.modelMapper
-                .map(this.productRepository.findById(id),
-                        ProductServiceModel.class);
+    public ProductServiceModel findById(String id) {
+        Optional<Product> productDB = this.productRepository.findById(id);
+        ProductServiceModel product = this.modelMapper.map(productDB.get(), ProductServiceModel.class);
 
-        return Optional.of(product);
+        return this.modelMapper.map(product, ProductServiceModel.class);
     }
 
     @Override
     public ProductServiceModel addProduct(ProductServiceModel productServiceModel) {
         try {
 
-            var product = this.modelMapper.map(productServiceModel, Product.class);
+            Product product = this.modelMapper.map(productServiceModel, Product.class);
 
             this.productRepository.save(product);
 
-            var productSM = this.modelMapper.map(product, ProductServiceModel.class);
-
-            return productSM;
+            return this.modelMapper.map(product, ProductServiceModel.class);
 
         } catch (Exception e) {
             return null;

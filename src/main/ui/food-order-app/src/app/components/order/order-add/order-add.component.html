@@ -1,5 +1,5 @@
 <body>
-    <div *ngIf="products.length > 0" class="bill">
+    <div *ngIf="products.length > 0 && products != null " class="bill">
         <h2>Сметка: {{ fee | currency:'BG':'symbol':'1.2-2' }} лв.</h2>
         <div>
             <ul>
@@ -42,7 +42,7 @@
         <p>{{ message }}</p>
     </div>
 
-    <div *ngIf="products.length < 1" class="no-products">
+    <div *ngIf="products.length < 1 || products == null " class="no-products">
         <p>Няма избрани продукти.</p>
     </div>
 </body>

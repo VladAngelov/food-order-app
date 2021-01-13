@@ -5,14 +5,22 @@ import java.math.BigDecimal;
 import java.util.List;
 
 public class OrderViewModel {
+    private String id;
     private List<ProductServiceModel> products;
     private String userData;
     private String date;
     private BigDecimal sum;
     private String address;
-    private  Boolean isActive;
+    private Boolean isActive;
 
     public OrderViewModel() { }
+
+    public String getId() {
+        return id;
+    }
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public List<ProductServiceModel> getProducts() {
         return products;

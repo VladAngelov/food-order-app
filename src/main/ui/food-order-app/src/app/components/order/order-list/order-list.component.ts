@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  OnInit
+} from '@angular/core';
 import { Router } from '@angular/router';
 import { AppConstants } from 'src/app/constants/app.constants';
 import { IOrder } from 'src/app/interfaces/order';
@@ -15,10 +18,11 @@ export class OrderListComponent implements OnInit {
   private roles: string[];
   isLoggedIn = false;
   isAdmin = false;
-  orders: IOrder[] = [];
 
-  activeOrders = this.orders.filter(o => o.isActive);
-  deactiveOrders = this.orders.filter(o => !o.isActive);
+  message = '';
+  orders: IOrder[] = [];
+  activeOrders: IOrder[] = [];
+  deactiveOrders: IOrder[] = [];
 
   constructor(
     private orderService: OrderService,
@@ -30,7 +34,13 @@ export class OrderListComponent implements OnInit {
     this.orderService.getAll()
       .subscribe(orders => {
         this.orders = orders;
-      })
+        this.sort();
+      }, err => {
+        this.message = err.message;
+        console.log('ERROR -->> ', err.message);
+      }, () => {
+        console.log('Orders -->> ', this.orders);
+      });
 
     this.isLoggedIn = !!this.tokenStorageService.getToken();
 
@@ -40,6 +50,18 @@ export class OrderListComponent implements OnInit {
       this.isAdmin = this.roles.includes('ROLE_ADMIN');
     }
     this.redirecting();
+
+  }
+  ORDER = this.orders.find(o => o.active);
+
+  sort() {
+    for (let i = 0; i < this.orders.length; i++) {
+      if (this.orders[i].active) {
+        this.activeOrders.push(this.orders[i]);
+      } else {
+        this.deactiveOrders.push(this.orders[i]);
+      }
+    }
   }
 
   redirecting() {
