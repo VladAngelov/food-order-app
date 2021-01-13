@@ -4,7 +4,7 @@ The application covers the basic part for online orders of food and drinks from 
 The restaurant offers a varied menu of soups, salads, main dishes, desserts and drinks.
 
 
-##G etting Started
+## Getting Started
 
 ### Frontend: 
 ```bash
