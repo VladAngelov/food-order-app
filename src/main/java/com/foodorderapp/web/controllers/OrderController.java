@@ -88,16 +88,15 @@ public class OrderController {
     public ResponseEntity<?> editOrder(
             @RequestBody OrderEditBindingModel orderEditBindingModel) {
         try {
-            OrderEditBindingModel orderExist = this.modelMapper
-                    .map(this.orderService
-                            .findById(orderEditBindingModel.getId()),
-                    OrderEditBindingModel.class);
 
-            if (orderExist != null) {
-                orderExist.setActive(orderEditBindingModel.getActive());
+            Optional<OrderServiceModel> orderExist =
+                    this.orderService.findById(orderEditBindingModel.getId());
+
+            if (orderExist.isPresent()) {
+                orderExist.get().setActive(orderEditBindingModel.getActive());
 
                 OrderServiceModel orderServiceModel = this.modelMapper
-                        .map(orderExist, OrderServiceModel.class);
+                        .map(orderExist.get(), OrderServiceModel.class);
 
                 return new ResponseEntity<>(this.modelMapper.map(
                                 this.orderService.addOrder(orderServiceModel),

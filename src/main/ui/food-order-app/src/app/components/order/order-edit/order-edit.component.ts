@@ -61,7 +61,8 @@ export class OrderEditComponent implements OnInit {
   submitHandler(): void {
     this.isLoading = true;
     this.order.active = this.form.controls['status'].value;
-
+    console.log(this.order.active);
+    debugger;
     this.orderService.editOrder(this.order)
       .subscribe(order => {
         this.order = order;

@@ -40,6 +40,15 @@
                 <div class="product-content">
                     <p>{{ order.date }}</p>
                     <p *ngIf="!order.active">Неактивна</p>
+                    <ul class="inner-list">
+                        <li *ngFor="let product of order.products">
+                            <p>{{ product.name }} </p>
+                            <p> {{ product.price | currency:'BG':'symbol':'1.2-2'}} лв. </p>
+                        </li>
+                    </ul>
+                    <p>{{ order.sum | currency:'BG':'symbol':'1.2-2'}} лв.</p>
+                    <p>{{ order.userData }}</p>
+                    <p>{{ order.address }}</p>
                     <p>{{ order.sum | currency:'BG':'symbol':'1.2-2'}} лв.</p>
                     <p>{{ order.userData }}</p>
                     <p>{{ order.address }}</p>

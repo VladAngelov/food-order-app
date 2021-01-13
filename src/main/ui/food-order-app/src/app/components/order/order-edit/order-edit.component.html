@@ -9,7 +9,7 @@
                 Зареждане...
             </p>
         </div>
-        <form [formGroup]="form" (ngSubmit)="submitHandler()">
+        <form [formGroup]="form" (ngSubmit)="submitHandler()" *ngIf="!isLoading">
             <div class="new-food-title">
                 <label for="data">Дата:</label>
                 <p>{{ order.date }}</p>
