@@ -68,6 +68,13 @@ public class ProductServiceImpl implements ProductService {
     public ProductServiceModel addProduct(ProductServiceModel productServiceModel) {
         try {
             Product product = this.modelMapper.map(productServiceModel, Product.class);
+            Product existProdcut = this.productRepository.findByName(productServiceModel.getName());
+
+            if (existProdcut != null) {
+                existProdcut.setAvailable(true);
+                this.productRepository.save(existProdcut);
+                return this.modelMapper.map(existProdcut, ProductServiceModel.class);
+            }
             product.setAvailable(true);
             this.productRepository.save(product);
 
