@@ -28,8 +28,8 @@ export class OrderService {
     return this.http.get(AppConstants.BASE_API_URL + AppConstants.ORDER_ALL_URL, httpOptions);
   }
 
-  getById(id) {
-    return this.http.get(AppConstants.BASE_API_URL + AppConstants.EDIT_BY_ID + id, httpOptions);
+  getById(id): Observable<any> {
+    return this.http.get(AppConstants.BASE_API_URL + AppConstants.ORDER_GET_BY_ID + id, httpOptions);
   }
 
   addOrder(order) {
@@ -40,8 +40,10 @@ export class OrderService {
       });
   }
 
-  editOrder(order) {
-    return this.http.put(AppConstants.BASE_API_URL + AppConstants.ORDER_EDIT, order, httpOptions);
+  editOrder(order): Observable<any> {
+
+    console.log('ORDER IN SERVICE -->>', order);
+    return this.http.post(AppConstants.BASE_API_URL + AppConstants.ORDER_EDIT, order, httpOptions);
   }
 
 }

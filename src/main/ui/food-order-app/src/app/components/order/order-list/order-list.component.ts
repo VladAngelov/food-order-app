@@ -52,7 +52,6 @@ export class OrderListComponent implements OnInit {
     this.redirecting();
 
   }
-  ORDER = this.orders.find(o => o.active);
 
   sort() {
     for (let i = 0; i < this.orders.length; i++) {

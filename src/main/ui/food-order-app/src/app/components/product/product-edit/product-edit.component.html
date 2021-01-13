@@ -1,16 +1,17 @@
 <div class="new-food-border">
     <div class="header-background">
-        <span>Нов продукт</span>
+        <span>Промяна на продукт</span>
     </div>
     <form [formGroup]="form" (ngSubmit)="submitHandler()">
         <div class="new-food-title">
             <label for="name">Име</label>
-            <input formControlName="name" type="text" name="name" id="name" placeholder="{{ product.name }}">
+            <input formControlName="name" type="text" name="name" id="name" placeholder="{{ product.name }}"
+                value="{{ product.name }}">
         </div>
         <div class="new-food-content">
             <label for="content">Описание</label>
             <textarea formControlName="content" type="text" name="content" id="content" rows="8" class="height"
-                placeholder="{{ product.content }}">
+                placeholder="{{ product.content }}">{{ product.content }}
             </textarea>
         </div>
 
@@ -21,15 +22,18 @@
                 <option *ngFor="let foodType of foodTypes | keyvalue" [ngValue]="foodType.value">
                     {{foodType.value}}
                 </option>
+                <option selected value="product.type">{{product.type}}</option>
             </select>
         </div>
 
         <div class="price-volume">
             <div class="new-food-title">
                 <label for="price">Цена</label>
-                <input formControlName="price" type="number" name="price" id="price" min="0.01">
+                <input formControlName="price" type="number" name="price" id="price" min="0.01"
+                    value="{{product.price}}">
                 <label for="volume">Количество</label>
-                <input formControlName="volume" type="number" name="volume" id="volume" min="10">
+                <input formControlName="volume" type="number" name="volume" id="volume" min="10"
+                    value="{{product.volume }}">
             </div>
         </div>
 
@@ -46,3 +50,4 @@
         </div>
     </form>
 </div>
+<div *ngIf="isLoading">Зареждане ... </div>

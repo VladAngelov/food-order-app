@@ -72,18 +72,20 @@ public class OrderController {
     }
 
     @GetMapping(path = Links.ORDER_BY_ID)
-    public  ResponseEntity<OrderViewModel> getOrder(@PathVariable("id") String id) {
+    public  ResponseEntity<?> getOrder(@PathVariable("id") String id) {
         try {
-            Optional<OrderServiceModel> order = this.orderService.findById(id);
-            return new ResponseEntity<>(this.modelMapper.map(order, OrderViewModel.class), HttpStatus.OK);
+            Optional<OrderServiceModel> orderServiceModel = this.orderService.findById(id);
+             OrderViewModel orderViewModel = this.modelMapper.map(orderServiceModel.get(), OrderViewModel.class);
+
+            return new ResponseEntity<>(orderViewModel, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 
         }
     }
 
-    @PutMapping(path = Links.ORDER_EDIT)
-    public ResponseEntity<OrderViewModel> editOrder(
+    @PostMapping(path = Links.ORDER_EDIT)
+    public ResponseEntity<?> editOrder(
             @RequestBody OrderEditBindingModel orderEditBindingModel) {
         try {
             OrderEditBindingModel orderExist = this.modelMapper

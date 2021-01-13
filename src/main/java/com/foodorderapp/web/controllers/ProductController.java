@@ -101,11 +101,10 @@ public class ProductController {
 
     @GetMapping(path = Links.PRODUCT_GET_BY_ID)
     public ResponseEntity<ProductViewModel> getProduct(@PathVariable("id") String id) {
-
         try {
-            var product = this.modelMapper
-                    .map(this.productService.findById(id),
-                            ProductViewModel.class);
+
+            var product = this.modelMapper.map(
+                    this.productService.findById(id), ProductViewModel.class);
 
             return  new ResponseEntity<>(product, HttpStatus.OK);
         } catch (Exception e) {
@@ -119,9 +118,6 @@ public class ProductController {
             ProductEditBindingModel productData = this.modelMapper
                             .map(this.productService.findById(productEditBindingModel.getId()),
                                     ProductEditBindingModel.class);
-
-//            Optional<ProductEditBindingModel> productOptional =
-//                    Optional.ofNullable(productData);
 
             if (productData != null) {
                 productData.setName(productEditBindingModel.getName());
@@ -157,29 +153,6 @@ public class ProductController {
         }
     }
 
-    @GetMapping(path = Links.PRODUCT_BY_TYPE)
-    public ResponseEntity<List<ProductViewModel>> findByType(
-            @PathVariable("type") String type) {
-        try {
-            List<ProductServiceModel> productsServiceModel =
-                    this.productService.findByType(type)
-                            .stream()
-                            .map(product -> this.modelMapper.map(product, ProductServiceModel.class))
-                            .collect(Collectors.toList());
-
-            List<ProductViewModel> productsViewModel = productsServiceModel
-                    .stream()
-                    .map(product -> this.modelMapper.map(product, ProductViewModel.class))
-                    .collect(Collectors.toList());
-
-            if (!productsViewModel.isEmpty()) {
-                return new ResponseEntity<>(productsViewModel, HttpStatus.OK);
-            }
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-         } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
 
     // compress the image bytes before storing it in the database
     private static byte[] compressBytes(byte[] data) {

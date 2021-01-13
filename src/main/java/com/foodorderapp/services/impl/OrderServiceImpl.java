@@ -64,8 +64,21 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public Optional<OrderServiceModel> findById(String id) {
         var order = this.orderRepository.findById(id);
-        return Optional.of(this.modelMapper
-                .map(order, OrderServiceModel.class));
+        List<ProductServiceModel> products = new ArrayList<>();
+
+        for(var pId : order.get().getProductsIds().split(" ")) {
+            products.add(this.productService.findById(pId));
+        }
+        OrderServiceModel orderSM = new OrderServiceModel();
+        orderSM.setProducts(products);
+        orderSM.setActive(order.get().getActive());
+        orderSM.setDate(order.get().getDate());
+        orderSM.setId(order.get().getId());
+        orderSM.setSum(order.get().getSum());
+        orderSM.setUserData(order.get().getUserData());
+        orderSM.setAddress(order.get().getAddress());
+
+        return Optional.of(orderSM);
     }
 
     @Override
@@ -107,6 +120,7 @@ public class OrderServiceImpl implements OrderService {
     public OrderServiceModel editOrder(OrderServiceModel orderServiceModel) {
         try {
             Optional<Order> orderDb = this.orderRepository.findById(orderServiceModel.getId());
+            orderDb.get().setActive(orderServiceModel.getActive());
             Order order = this.modelMapper.map(orderDb, Order.class);
             this.orderRepository.save(order);
             return this.modelMapper.map(order, OrderServiceModel.class);

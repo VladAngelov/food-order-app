@@ -1,1 +1,49 @@
-<p>order-edit works!</p>
+<body>
+    <section>
+        <div class="menu">
+            <h1>ПРОМЕНИ ПОРЪЧКА</h1>
+        </div>
+
+        <div class="empty" *ngIf="isLoading">
+            <p>
+                Зареждане...
+            </p>
+        </div>
+        <form [formGroup]="form" (ngSubmit)="submitHandler()">
+            <div class="new-food-title">
+                <label for="data">Дата:</label>
+                <p>{{ order.date }}</p>
+            </div>
+            <div class="new-food-content">
+                <label for="status">Статус:
+                    <span *ngIf="order.active"> Активна </span>
+                    <span *ngIf="!order.active"> Неактивна </span>
+                </label>
+                <select id="status" formControlName="status">
+                    <option [ngValue]="true">Активна</option>
+                    <option [ngValue]="false">Неактивна</option>
+                </select>
+            </div>
+            <div class="new-food-content">
+                <label for="products">Продукти: </label>
+                <ul class="inner-list">
+                    <li *ngFor="let product of order.products">
+                        <p>{{ product.name }} </p>
+                        <p> {{ product.price | currency:'BG':'symbol':'1.2-2'}} лв. </p>
+                    </li>
+                </ul>
+                <label for="sum">Обща цена:</label>
+                <p>{{ order.sum | currency:'BG':'symbol':'1.2-2'}} лв.</p>
+
+                <label for="sum">Данни на клиента:</label>
+                <p>{{ order.userData }}</p>
+                <label for="sum">Адрес:</label>
+                <p>{{ order.address }}</p>
+            </div>
+            <div class="change-btn">
+                <button class="btn btn-primary">Промени</button>
+            </div>
+        </form>
+
+    </section>
+</body>

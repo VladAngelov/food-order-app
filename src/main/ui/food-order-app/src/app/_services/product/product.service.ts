@@ -17,12 +17,13 @@ export class ProductService {
   }
 
   addProduct(product) {
-    console.log('In product service -->>', product);
     return this.http.post(AppConstants.BASE_API_URL + AppConstants.PRODUCT_ADD_URL, product, httpOptions)
       .subscribe(x => console.log('Product service -->> ', x));
   }
 
-  getById(id: string) {
+  getById(id: string): Observable<any> {
+
+    console.log(AppConstants.BASE_API_URL + AppConstants.PRODUCT_BY_ID + id);
     return this.http.get(AppConstants.BASE_API_URL + AppConstants.PRODUCT_BY_ID + id, httpOptions);
   }
 

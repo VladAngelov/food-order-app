@@ -13,7 +13,7 @@ public class Links {
     public static final String PRODUCTS = "/menu";
     public static final String PRODUCTS_ALL = "/menu/all";
     public static final String PRODUCT_ADD = "/menu/add";
-    public static final String PRODUCT_GET_BY_ID = "/menu/edit/{id}";
+    public static final String PRODUCT_GET_BY_ID = "/menu/{id}";
     public static final String PRODUCT_EDIT = "/menu/edit";
     public static final String PRODUCT_DELETE_BY_ID = "/menu/delete/{id}";
     public static final String PRODUCT_BY_ID = "/menu/{id}";
@@ -36,7 +36,6 @@ public class Links {
     // --- ORDER --- //
     public static final String ORDER_ALL = "/order/all";
     public static final String ORDER_ADD = "/order/add";
-    public static final String ORDER_GET_BY_ID = "/order/edit/{id}";
     public static final String ORDER_EDIT = "/order/edit";
     //public static final String ORDER_DELETE_BY_ID = "/order/delete/{id}";
     public static final String ORDER_BY_ID = "/order/{id}";

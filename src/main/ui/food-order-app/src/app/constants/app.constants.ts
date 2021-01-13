@@ -18,7 +18,7 @@ export class AppConstants {
     // --- PRODUCT --- //
     public static PRODUCT_URL: string = 'menu';
     public static PRODUCT_ALL_URL: string = 'menu/all';
-    public static PRODUCT_BY_ID: string = "menu/{id}";
+    public static PRODUCT_BY_ID: string = "menu/";
     public static PRODUCT_ADD_URL: string = 'menu/add';
     public static PRODUCT_EDIT: string = "menu/edit/";
     public static PRODUCT_DELETE_BY_ID: string = 'menu/delete/{id}';
@@ -58,6 +58,6 @@ export class AppConstants {
     public static ORDER_ALL_URL: string = 'order/all';
     public static ORDER_ADD_URL: string = 'order/add';
     public static ORDER_EDIT: string = 'order/edit';
-
+    public static ORDER_GET_BY_ID: string = 'order/';
 
 }

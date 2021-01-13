@@ -13,6 +13,7 @@ import {
 
 import { AppConstants } from 'src/app/constants/app.constants';
 import { ProductType } from 'src/app/enums/product-type';
+import { IProduct } from 'src/app/interfaces/product';
 import { ImageService } from 'src/app/_services/image/image.service';
 import { ProductService } from 'src/app/_services/product/product.service';
 import { TokenStorageService } from 'src/app/_services/token/token-storage.service';
@@ -29,7 +30,7 @@ export class ProductEditComponent implements OnInit {
   message: string;
 
   id: string;
-  product: any;
+  product: IProduct;
   isLoading = false;
 
   HOME = AppConstants.HOME_URL;
@@ -52,25 +53,32 @@ export class ProductEditComponent implements OnInit {
     private tokenStorageService: TokenStorageService,
     private activatedRoute: ActivatedRoute,
     private imageService: ImageService
-  ) { }
+  ) {
+    this.id = null;
+    this.id = this.activatedRoute.snapshot.params.id;
+  }
 
   ngOnInit(): void {
     this.isLoading = true;
 
-    this.isLoggedIn = !!this.tokenStorageService.getToken();
+    this.productService.getById(this.id).subscribe(
+      product => {
+        this.product = product;
+        console.log(this.product.type);
+      }, err => {
+        this.message = err.message;
+        console.log('ERROR -->> ', err.message);
+      }, () => {
+        console.log('Product -->> ', this.product);
+      });
 
+    this.isLoggedIn = !!this.tokenStorageService.getToken();
     if (this.isLoggedIn) {
       const user = this.tokenStorageService.getUser();
       this.roles = user.roles;
       this.isAdmin = this.roles.includes('ROLE_ADMIN');
       this.username = user.displayName;
     }
-
-    this.id = null;
-    this.id = this.activatedRoute.snapshot.params.id;
-    this.productService.getById(this.id)
-      .subscribe(x => this.product = x);
-
     this.isLoading = false;
   }
 
@@ -81,30 +89,46 @@ export class ProductEditComponent implements OnInit {
   }
 
   submitHandler(): void {
-    debugger;
-
-    if (this.form.controls['name'].value != null || undefined) {
+    if (this.form.controls['name'].value != null &&
+      this.form.controls['name'].value != undefined &&
+      this.form.controls['name'].value != "") {
       this.product.name = this.form.controls['name'].value;
     }
-    if (this.form.controls['content'].value != null || undefined) {
+    if (this.form.controls['content'].value != null &&
+      this.form.controls['content'].value != undefined &&
+      this.form.controls['content'].value != "") {
       this.product.content = this.form.controls['content'].value;
     }
-    if (this.form.controls['volume'].value != null || undefined) {
+    if (this.form.controls['volume'].value != null &&
+      this.form.controls['volume'].value != undefined &&
+      this.form.controls['volume'].value != "") {
       this.product.volume = this.form.controls['volume'].value;
     }
-    if (this.form.controls['price'].value != null || undefined) {
+    if (this.form.controls['price'].value != null &&
+      this.form.controls['price'].value != undefined &&
+      this.form.controls['price'].value != String.length < 0) {
       this.product.price = this.form.controls['price'].value;
     }
-    if (this.form.controls['foodType'].value != null || undefined) {
+    if (this.form.controls['foodType'].value != null &&
+      this.form.controls['foodType'].value != undefined &&
+      this.form.controls['foodType'].value != "") {
       this.product.type = this.form.controls['foodType'].value;
     }
     //product.picture = this.selectedFile
-    debugger;
-    if (this.selectedFile != null || undefined) {
+    if (this.selectedFile != null &&
+      this.selectedFile != undefined) {
       this.onUpload(this.product.name);
     }
-    this.productService.editProduct(this.product);
-    this.router.navigate([this.HOME]);
+    this.productService.editProduct(this.product).subscribe(
+      response => {
+        console.log('REsponse', response);
+      }, err => {
+        this.message = err.message;
+        console.log('ERROR -->> ', err.message);
+      }, () => {
+        console.log('Success!');
+        this.router.navigate([this.HOME]);
+      });
 
     // TODO: To optimize
   }
@@ -114,11 +138,8 @@ export class ProductEditComponent implements OnInit {
   }
 
   onUpload(name: string) {
-    console.log(this.selectedFile);
-    debugger;
     const uploadImageData = new FormData();
     uploadImageData.append('imageFile', this.selectedFile, name);
-
     this.imageService.uploadImage(uploadImageData);
   }
 
