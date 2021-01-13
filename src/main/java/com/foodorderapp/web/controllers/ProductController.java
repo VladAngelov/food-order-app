@@ -62,23 +62,6 @@ public class ProductController {
         }
     }
 
-//    @GetMapping(path = Links.PRODUCT_BY_ID)
-//    public ResponseEntity<ProductViewModel> getProductById(
-//            @PathVariable("id") String id) {
-//        ProductServiceModel productServiceModel = this.modelMapper
-//                .map(this.productService.findById(id), ProductServiceModel.class);
-//
-//        ProductViewModel product = this.modelMapper
-//                .map(productServiceModel, ProductViewModel.class);
-//
-//        if (product.getName() != null) {
-//            Optional<ProductViewModel> productOp = Optional.of(product);
-//            return new ResponseEntity<>(productOp.get(), HttpStatus.OK);
-//        } else {
-//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-//        }
-//    }
-
     @PostMapping(path = Links.PRODUCT_ADD)
     public ResponseEntity<?> addProduct(
             @RequestBody ProductAddBindingModel productAddBindingModel ) {

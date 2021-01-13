@@ -52,6 +52,9 @@ export class LogInComponent {
       this.errorMessage = error;
       this.isLoginFailed = true;
     }
+    if (this.isLoggedIn) {
+      this.router.navigate([AppConstants.HOME_URL]);
+    }
   }
 
   onSubmit(): void {

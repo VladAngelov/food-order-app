@@ -24,6 +24,11 @@ public class ImageServiceImpl implements ImageService {
     @Override
     public ImageServiceModel upload(ImageServiceModel imageServiceModel) {
         var img = this.modelMapper.map(imageServiceModel, Image.class);
+        var exist = this.imageRepository.findByName(img.getName());
+        if(exist != null){
+            this.edit(imageServiceModel);
+        }
+
         this.imageRepository.save(img);
         return this.modelMapper.map(img, ImageServiceModel.class);
     }

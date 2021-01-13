@@ -18,10 +18,10 @@ const routes: Routes = [
       {
         path: '',
         pathMatch: 'full',
-        redirectTo: `${HOME}`
+        redirectTo: HOME
       },
       {
-        path: `${HOME}`,
+        path: HOME,
         component: HomeComponent,
         data: {
           title: 'Начало'

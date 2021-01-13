@@ -6,24 +6,24 @@
         <div class="new-food-title">
             <label for="name">Име <span class="red">*</span></label>
             <input formControlName="name" type="text" name="name" id="name" required minlength="3">
-            <!-- <p class="error" *ngIf="form.get('name').touched && form.get('name').errors?.required">
-                Food name is required.
+            <p class="error" *ngIf="form.get('name').touched && form.get('name').errors?.required">
+                Името е задължително!
             </p>
             <p class="error" *ngIf="form.get('name').touched && form.get('name').errors?.minlength">
-                Food name must be at least 3 characters long.
-            </p> -->
+                Името, трябва да е поне 3 символа!
+            </p>
         </div>
         <div class="new-food-content">
             <label for="content">Описание <span class="red">*</span></label>
             <textarea formControlName="content" type="text" name="content" id="content" rows="8" class="height" required
                 minlength="3">
             </textarea>
-            <!-- <p class="error" *ngIf="content.touched && content.errors?.required">
-                The field with your food content is required.
+            <p class="error" *ngIf="form.get('content').touched && form.get('content').errors?.required">
+                Съдържанието е задължително!
             </p>
-            <p class="error" *ngIf="content.touched && content.errors?.required">
-                Food content must be at least 5 characters long.
-            </p> -->
+            <p class="error" *ngIf="form.get('content').touched && form.get('content').errors?.required">
+                Съдържанието, трябва да е поне 3 симовла!
+            </p>
         </div>
 
         <div class="new-food-content">

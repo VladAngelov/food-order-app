@@ -117,7 +117,6 @@ export class ProductListComponent implements OnInit {
     this.order = this.orderServcie.products
   }
 
-
   redirecting() {
     if (!this.isLoggedIn) {
       this.router.navigate([AppConstants.HOME_URL]);
