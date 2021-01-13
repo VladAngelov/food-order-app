@@ -21,7 +21,7 @@ export class AppConstants {
     public static PRODUCT_BY_ID: string = "menu/";
     public static PRODUCT_ADD_URL: string = 'menu/add';
     public static PRODUCT_EDIT: string = "menu/edit/";
-    public static PRODUCT_DELETE_BY_ID: string = 'menu/delete/{id}';
+    public static PRODUCT_DELETE_BY_ID: string = 'menu/delete/';
     public static PRODUCT_BY_TYPE: string = 'menu/{type}';
 
     public static PRODUCT_IMAGE_ADD: string = 'image/upload';

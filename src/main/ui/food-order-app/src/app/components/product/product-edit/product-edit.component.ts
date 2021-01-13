@@ -143,4 +143,17 @@ export class ProductEditComponent implements OnInit {
     this.imageService.uploadImage(uploadImageData);
   }
 
+  onDelete(id: string) {
+    this.productService.deleteProduct(id).subscribe(
+      response => {
+        console.log('Response', response);
+      }, err => {
+        this.message = err.message;
+        console.log('ERROR -->> ', err.message);
+      }, () => {
+        console.log('Success!');
+        this.router.navigate([this.HOME]);
+      });
+  }
+
 }

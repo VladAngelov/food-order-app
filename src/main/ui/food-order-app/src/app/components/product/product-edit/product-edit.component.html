@@ -47,6 +47,7 @@
         <div class="new-food-buttons">
             <button class="btn btn-add" [disabled]="isLoading">Добави</button>
             <button type="button" class="btn btn-cancel" routerLink="/">Откажи</button>
+            <button type="button" class="btn btn-danger" (click)="onDelete(product.id)">Премахни</button>
         </div>
     </form>
 </div>

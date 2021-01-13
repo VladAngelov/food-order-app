@@ -13,6 +13,7 @@ public class Product extends BaseEntity {
     private String type;
     private Integer volume;
     private double price;
+    private Boolean available;
 
     public Product() {
     }
@@ -57,4 +58,11 @@ public class Product extends BaseEntity {
         this.price = price;
     }
 
+    @Column(name = "available")
+    public Boolean getAvailable() {
+        return available;
+    }
+    public void setAvailable(Boolean available) {
+        this.available = available;
+    }
 }

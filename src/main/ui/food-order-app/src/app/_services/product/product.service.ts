@@ -31,8 +31,8 @@ export class ProductService {
     return this.http.put(AppConstants.BASE_API_URL + AppConstants.PRODUCT_EDIT, product, httpOptions);
   }
 
-  deleteProduct(id: string) {
-    return this.http.post(AppConstants.BASE_API_URL + AppConstants.PRODUCT_DELETE_BY_ID, id, httpOptions);
+  deleteProduct(id: string): Observable<any> {
+    return this.http.delete(AppConstants.BASE_API_URL + AppConstants.PRODUCT_DELETE_BY_ID + id, httpOptions);
   }
 
 }

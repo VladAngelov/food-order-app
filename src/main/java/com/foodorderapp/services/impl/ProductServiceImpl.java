@@ -67,13 +67,11 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public ProductServiceModel addProduct(ProductServiceModel productServiceModel) {
         try {
-
             Product product = this.modelMapper.map(productServiceModel, Product.class);
-
+            product.setAvailable(true);
             this.productRepository.save(product);
 
             return this.modelMapper.map(product, ProductServiceModel.class);
-
         } catch (Exception e) {
             return null;
         }
@@ -95,6 +93,9 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public void deleteById(String id) {
-        this.productRepository.deleteById(id);
+        var product = this.productRepository.findById(id);
+        Product p = this.modelMapper.map(product.get(), Product.class);
+        p.setAvailable(false);
+        this.productRepository.save(p);
     }
 }
