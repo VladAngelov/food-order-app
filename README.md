@@ -1,23 +1,23 @@
-#Food Order App
+# Food Order App
 
 The application covers the basic part for online orders of food and drinks from a restaurant. 
 The restaurant offers a varied menu of soups, salads, main dishes, desserts and drinks.
 
 
-##Getting Started
+## Getting Started
 
-###Frontend: 
+### Frontend: 
 ```bash
     npm install  @angular/cli
     ng serve --port 8081
 ```    
 
-###Back-end
+### Back-end
  Spring Boot, Spring Security, OAuth 2 (Google)
 
 localhost:8080
 
-###Database
+### Database
 MySQL
 
 admin user for tests: admin@foodorderapp.com    password: admin@
