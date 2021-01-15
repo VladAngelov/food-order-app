@@ -27,6 +27,7 @@ public class ImageServiceImpl implements ImageService {
         var exist = this.imageRepository.findByName(img.getName());
         if(exist != null){
             this.edit(imageServiceModel);
+            return imageServiceModel;
         }
 
         this.imageRepository.save(img);
