@@ -20,7 +20,9 @@ localhost:8080
 ### Database
 MySQL
 
-admin user for tests: admin@foodorderapp.com    password: admin@
+### User for test
+* email: admin@foodorderapp.com
+* password: admin@
 
 Or change default admin from:
 ```java
