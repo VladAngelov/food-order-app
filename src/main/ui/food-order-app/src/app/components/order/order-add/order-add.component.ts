@@ -8,7 +8,6 @@ import {
   Validators
 } from '@angular/forms';
 import { Router } from '@angular/router';
-import { nextTick } from 'process';
 import { AppConstants } from 'src/app/constants/app.constants';
 
 import { IProduct } from 'src/app/interfaces/product';
