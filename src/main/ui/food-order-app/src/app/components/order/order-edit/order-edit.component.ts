@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AppConstants } from 'src/app/constants/app.constants';
 import { IOrder } from 'src/app/interfaces/order';
@@ -22,8 +22,8 @@ export class OrderEditComponent implements OnInit {
   order: IOrder;
   id: string;
 
-  form = new FormGroup({
-    status: new FormControl(''),
+  form = new UntypedFormGroup({
+    status: new UntypedFormControl(''),
   });
 
   constructor(

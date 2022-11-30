@@ -3,8 +3,8 @@ import {
   OnInit
 } from '@angular/core';
 import {
-  FormControl,
-  FormGroup,
+  UntypedFormControl,
+  UntypedFormGroup,
   Validators
 } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -28,12 +28,12 @@ export class ProductAddComponent implements OnInit {
   selectedFile: File;
   message: string;
 
-  form = new FormGroup({
-    name: new FormControl('', [Validators.required, Validators.minLength(3)]),
-    content: new FormControl('', [Validators.required, Validators.minLength(5)]),
-    volume: new FormControl('', [Validators.required]),
-    foodType: new FormControl('', [Validators.required]),
-    price: new FormControl('', [Validators.required])
+  form = new UntypedFormGroup({
+    name: new UntypedFormControl('', [Validators.required, Validators.minLength(3)]),
+    content: new UntypedFormControl('', [Validators.required, Validators.minLength(5)]),
+    volume: new UntypedFormControl('', [Validators.required]),
+    foodType: new UntypedFormControl('', [Validators.required]),
+    price: new UntypedFormControl('', [Validators.required])
   });
 
   constructor(

@@ -3,8 +3,8 @@ import {
   OnInit
 } from '@angular/core';
 import {
-  FormControl,
-  FormGroup
+  UntypedFormControl,
+  UntypedFormGroup
 } from '@angular/forms';
 import {
   ActivatedRoute,
@@ -39,12 +39,12 @@ export class ProductEditComponent implements OnInit {
   isAdmin = false;
   username: string;
 
-  form = new FormGroup({
-    name: new FormControl(''),
-    content: new FormControl(''),
-    volume: new FormControl(''),
-    foodType: new FormControl(''),
-    price: new FormControl('')
+  form = new UntypedFormGroup({
+    name: new UntypedFormControl(''),
+    content: new UntypedFormControl(''),
+    volume: new UntypedFormControl(''),
+    foodType: new UntypedFormControl(''),
+    price: new UntypedFormControl('')
   });
 
   constructor(
