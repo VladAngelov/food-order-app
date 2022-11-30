@@ -3,8 +3,8 @@ import {
   OnInit
 } from '@angular/core';
 import {
-  FormControl,
-  FormGroup,
+  UntypedFormControl,
+  UntypedFormGroup,
   Validators
 } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -33,8 +33,8 @@ export class OrderAddComponent implements OnInit {
 
   message = '';
 
-  form = new FormGroup({
-    address: new FormControl('', [Validators.required, Validators.minLength(3)])
+  form = new UntypedFormGroup({
+    address: new UntypedFormControl('', [Validators.required, Validators.minLength(3)])
   });
 
   constructor(
